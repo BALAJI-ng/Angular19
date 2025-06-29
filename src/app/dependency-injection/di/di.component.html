@@ -1,0 +1,257 @@
+<div class="p-4">
+    <h2>Dependency Injection in Angular</h2>
+
+    <!-- Why Use Token Injection Section -->
+    <div class="why-tokens-section mb-4">
+        <div class="alert alert-info">
+            <h4><i class="bi bi-question-circle"></i> Why Use Token Injection?</h4>
+            <div class="row">
+                <div class="col-md-6">
+                    <h6>🔑 Key Benefits:</h6>
+                    <ul>
+                        <li><strong>Type Safety:</strong> Compile-time type checking</li>
+                        <li><strong>No Naming Conflicts:</strong> Unique tokens prevent collisions</li>
+                        <li><strong>Better IntelliSense:</strong> IDE autocomplete support</li>
+                        <li><strong>Refactoring Safe:</strong> Safe to rename and move</li>
+                        <li><strong>Tree Shaking:</strong> Better optimization</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h6>⚠️ Problems with String Tokens:</h6>
+                    <ul>
+                        <li><strong>Runtime Errors:</strong> Typos cause injection failures</li>
+                        <li><strong>No Type Safety:</strong> any type by default</li>
+                        <li><strong>Naming Conflicts:</strong> Easy to accidentally reuse</li>
+                        <li><strong>Hard to Track:</strong> Difficult to find all usages</li>
+                        <li><strong>No IntelliSense:</strong> No autocomplete help</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Comparison Section -->
+    <div class="comparison-section mb-4">
+        <h3>🔍 String vs Token Comparison</h3>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card border-danger">
+                    <div class="card-header bg-danger text-white">
+                        <h6><i class="bi bi-x-circle"></i> ❌ Bad: String Tokens</h6>
+                    </div>
+                    <div class="card-body">
+                        <pre><code>// ❌ Problems with string tokens
+providers: [
+  &#123; provide: 'API_URL', useValue: 'https://api.com' &#125;,
+  &#123; provide: 'api_url', useValue: 'different!' &#125;, // Conflict!
+]
+
+constructor(
+  &#64;Inject('API_URL') private apiUrl: any // No type safety!
+) &#123;&#125;
+
+// Runtime errors:
+&#64;Inject('API_ULR') // Typo = injection failure!</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card border-success">
+                    <div class="card-header bg-success text-white">
+                        <h6><i class="bi bi-check-circle"></i> ✅ Good: Injection Tokens</h6>
+                    </div>
+                    <div class="card-body">
+                        <pre><code>// ✅ Type-safe injection tokens
+export const API_URL = new InjectionToken&lt;string&gt;('api.url');
+
+providers: [
+  &#123; provide: API_URL, useValue: 'https://api.com' &#125;,
+]
+
+constructor(
+  &#64;Inject(API_URL) private apiUrl: string // Type safe!
+) &#123;&#125;
+
+// Compile-time safety:
+&#64;Inject(API_ULR) // Compiler error = safe!</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Real-world Examples -->
+    <div class="examples-section mb-4">
+        <h3>🌍 Real-World Use Cases</h3>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header bg-info text-white">
+                        <h6>🔧 Configuration</h6>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Current Config:</strong></p>
+                        <ul>
+                            <li>API URL: {{config.apiUrl}}</li>
+                            <li>Timeout: {{config.timeout}}ms</li>
+                            <li>Logging: {{config.enableLogging ? 'On' : 'Off'}}</li>
+                            <li>Version: {{config.version}}</li>
+                        </ul>
+                        <small class="text-muted">Factory-created based on environment</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header bg-warning text-dark">
+                        <h6>🎛️ Feature Flags</h6>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Dynamic Features:</strong></p>
+                        <ul>
+                            <li>Dark Mode: <span class="badge bg-success">Enabled</span></li>
+                            <li>Beta Features: <span class="badge bg-warning">Limited</span></li>
+                            <li>Analytics: <span class="badge bg-info">On</span></li>
+                        </ul>
+                        <small class="text-muted">Injected per environment/user</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header bg-secondary text-white">
+                        <h6>📱 Multi-Platform</h6>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Platform Services:</strong></p>
+                        <ul>
+                            <li>Storage: LocalStorage</li>
+                            <li>HTTP: Browser Fetch</li>
+                            <li>Push: Web Notifications</li>
+                        </ul>
+                        <small class="text-muted">Different implementations per platform</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="navigation-section mb-4">
+        <div class="nav-tabs-wrapper">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#providers" data-bs-toggle="tab">Provider Types</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['injection-tokens']">Injection Tokens</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="tab-content">
+        <div class="tab-pane fade show active" id="providers">
+            <h3>4 Types of Providers in Angular</h3>
+
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">1. useClass Provider</h5>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Purpose:</strong> Creates an instance of a class and provides it as a dependency.
+                            </p>
+                            <p><strong>Example:</strong>
+                                <code>{{ '{' }} provide: ProductService, useClass: ProductService {{ '}' }}</code>
+                            </p>
+                            <p><strong>Data:</strong> {{data | json}}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0">2. useValue Provider</h5>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Purpose:</strong> Provides a simple value, constant, or pre-configured object.
+                            </p>
+                            <p><strong>Example:</strong>
+                                <code>{{ '{' }} provide: API_URL_TOKEN, useValue: 'https://api.example.com' {{ '}' }}</code>
+                            </p>
+                            <p><strong>Token API URL:</strong> {{apiUrl}}</p>
+                            <p><strong>String API URL:</strong> {{stringTokenApiUrl}}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-header bg-warning text-dark">
+                            <h5 class="mb-0">3. useFactory Provider</h5>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Purpose:</strong> Provides a value by calling a factory function for dynamic
+                                configuration.</p>
+                            <p><strong>Example:</strong>
+                                <code>{{ '{' }} provide: CONFIG_TOKEN, useFactory: createConfig {{ '}' }}</code>
+                            </p>
+                            <p><strong>Dynamic API URL:</strong> {{dynamicApiUrl}}</p>
+                            <p><strong>Config:</strong> {{config | json}}</p>
+                            <p><strong>Timestamp:</strong> {{timestamp}}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-header bg-info text-white">
+                            <h5 class="mb-0">4. useExisting Provider</h5>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Purpose:</strong> Creates an alias to an existing provider. Multiple tokens can
+                                refer to
+                                the same instance.</p>
+                            <p><strong>Example:</strong>
+                                <code>{{ '{' }} provide: 'LOGGER', useExisting: ConsoleLoggerService {{ '}' }}</code>
+                            </p>
+                            <button class="btn btn-info" (click)="demonstrateUseExisting()">
+                                Test useExisting Pattern
+                            </button>
+                            <small class="d-block mt-2 text-muted">Check the console to see the demonstration</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert alert-light border">
+                <h6>Key Differences:</h6>
+                <ul class="mb-0">
+                    <li><strong>useClass:</strong> Creates new instances when injected</li>
+                    <li><strong>useValue:</strong> Returns the exact same value/object reference</li>
+                    <li><strong>useFactory:</strong> Calls a function to create the value (useful for complex
+                        initialization)
+                    </li>
+                    <li><strong>useExisting:</strong> Creates aliases - all tokens refer to the same singleton instance
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Quick Link to Injection Tokens -->
+            <div class="mt-4">
+                <div class="card bg-light">
+                    <div class="card-body text-center">
+                        <h5><i class="bi bi-key text-primary"></i> Want to learn more about Injection Tokens?</h5>
+                        <p class="mb-3">Explore advanced injection token patterns and real-world examples</p>
+                        <a [routerLink]="['injection-tokens']" class="btn btn-primary">
+                            <i class="bi bi-arrow-right"></i> View Injection Token Examples
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

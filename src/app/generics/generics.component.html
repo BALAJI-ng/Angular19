@@ -1,0 +1,483 @@
+<div class="generics-container">
+  <!-- Page Header -->
+  <div class="page-header">
+    <h1><i class="bi bi-code-square text-primary"></i> TypeScript Generics</h1>
+    <p class="lead">Master TypeScript generics with real-world examples, generic classes, functions, and constraints</p>
+  </div>
+
+  <!-- Basic Generics Concepts -->
+  <div class="section basic-generics">
+    <h2>🔧 Basic Generic Concepts</h2>
+    
+    <div class="row">
+      <div class="col-md-6">
+        <div class="example-card">
+          <h5>Generic Interface - ApiResponse&lt;T&gt;</h5>
+          <div class="generic-display">
+            <div class="generic-code">
+              <pre><code>interface ApiResponse&lt;T&gt; &#123;
+  success: boolean;
+  message: string;
+  data: T;  // Generic type parameter
+  timestamp: Date;
+  status: number;
+&#125;
+
+// Usage examples:
+type UserResponse = ApiResponse&lt;User[]&gt;;
+type ProductResponse = ApiResponse&lt;Product&gt;;</code></pre>
+            </div>
+            <div class="generic-data">
+              <h6>User API Response:</h6>
+              <div class="response-display">
+                <div><strong>Success:</strong> 
+                  <span class="badge" [class.bg-success]="userApiResponse.success" [class.bg-danger]="!userApiResponse.success">
+                    {{ userApiResponse.success }}
+                  </span>
+                </div>
+                <div><strong>Message:</strong> {{ userApiResponse.message }}</div>
+                <div><strong>Data Count:</strong> {{ userApiResponse.data.length }} users</div>
+                <div><strong>Status:</strong> {{ userApiResponse.status }}</div>
+                <div><strong>Timestamp:</strong> {{ userApiResponse.timestamp | date:'short' }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="example-card">
+          <h5>Generic Class - DataStore&lt;T&gt;</h5>
+          <div class="generic-display">
+            <div class="generic-code">
+              <pre><code>class DataStore&lt;T extends &#123; id: number &#125;&gt; &#123;
+  items: T[] = [];
+
+  add(item: T): void &#123;
+    this.items.push(item);
+  &#125;
+
+  getById(id: number): T | undefined &#123;
+    return this.items.find(item => item.id === id);
+  &#125;
+
+  filter(predicate: (item: T) => boolean): T[] &#123;
+    return this.items.filter(predicate);
+  &#125;
+&#125;</code></pre>
+            </div>
+            <div class="generic-data">
+              <h6>Store Statistics:</h6>
+              <div class="stats-grid">
+                <div class="stat-item">
+                  <div class="stat-value">{{ getEntityCount(userStore) }}</div>
+                  <div class="stat-label">Users</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-value">{{ getEntityCount(productStore) }}</div>
+                  <div class="stat-label">Products</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-value">{{ getEntityCount(orderStore) }}</div>
+                  <div class="stat-label">Orders</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Generic Functions -->
+  <div class="section generic-functions">
+    <h2>⚡ Generic Functions</h2>
+    
+    <div class="row">
+      <div class="col-md-6">
+        <div class="example-card">
+          <h5>Generic Function Examples</h5>
+          <div class="generic-display">
+            <div class="generic-code">
+              <pre><code>// Generic function with type parameter
+function cloneObject&lt;T&gt;(obj: T): T &#123;
+  return JSON.parse(JSON.stringify(obj));
+&#125;
+
+// Generic function with keyof constraint
+function getProperty&lt;T, K extends keyof T&gt;(
+  obj: T, 
+  key: K
+): T[K] &#123;
+  return obj[key];
+&#125;</code></pre>
+            </div>
+            <div class="generic-data">
+              <h6>Function Results:</h6>
+              <div class="function-results">
+                <div><strong>Original User:</strong> {{ functionResults.originalUser?.name }}</div>
+                <div><strong>Cloned User:</strong> {{ functionResults.clonedUser?.name }}</div>
+                <div><strong>User Name:</strong> {{ functionResults.userName }}</div>
+                <div><strong>User Email:</strong> {{ functionResults.userEmail }}</div>
+                <div><strong>User Map Size:</strong> {{ functionResults.userMapSize }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="example-card">
+          <h5>Array to Map Conversion</h5>
+          <div class="generic-display">
+            <div class="generic-code">
+              <pre><code>function arrayToMap&lt;T, K extends keyof T&gt;(
+  array: T[], 
+  keyProperty: K
+): Map&lt;T[K], T&gt; &#123;
+  const map = new Map&lt;T[K], T&gt;();
+  array.forEach(item => &#123;
+    map.set(item[keyProperty], item);
+  &#125;);
+  return map;
+&#125;</code></pre>
+            </div>
+            <div class="generic-data">
+              <h6>Map Keys:</h6>
+              <div class="map-keys">
+                <span class="badge bg-primary me-1" *ngFor="let key of functionResults.userMapKeys">
+                  {{ key }}
+                </span>
+              </div>
+              <div class="mt-2">
+                <small class="text-muted">User IDs converted to Map keys</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Generic Store -->
+  <div class="section interactive-store">
+    <h2>🎮 Interactive Generic Data Store</h2>
+    
+    <!-- User Management -->
+    <div class="row">
+      <div class="col-md-6">
+        <div class="example-card">
+          <h5>User Store Management</h5>
+          <div class="store-management">
+            <div class="add-form">
+              <h6>Add New User:</h6>
+              <input type="text" [(ngModel)]="newUser.name" class="form-control mb-2" placeholder="Name">
+              <input type="email" [(ngModel)]="newUser.email" class="form-control mb-2" placeholder="Email">
+              <select [(ngModel)]="newUser.role" class="form-select mb-2">
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
+                <option value="moderator">Moderator</option>
+              </select>
+              <div class="form-check mb-2">
+                <input type="checkbox" [(ngModel)]="newUser.isActive" class="form-check-input" id="userActive">
+                <label class="form-check-label" for="userActive">Active</label>
+              </div>
+              <button class="btn btn-success w-100" (click)="addUser()">Add User</button>
+            </div>
+            
+            <!-- Filter -->
+            <div class="filter-section mt-3">
+              <h6>Filter Users:</h6>
+              <input type="text" [(ngModel)]="userFilter" class="form-control" placeholder="Search by name or email">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="example-card">
+          <h5>Users List ({{ getFilteredUsers().length }} / {{ getEntityCount(userStore) }})</h5>
+          <div class="entity-list">
+            <div class="entity-item" *ngFor="let user of getFilteredUsers()">
+              <div class="entity-info">
+                <strong>{{ user.name }}</strong> ({{ user.email }})
+                <div class="entity-meta">
+                  <span class="badge bg-info me-1">{{ user.role }}</span>
+                  <span class="badge" [class.bg-success]="user.isActive" [class.bg-secondary]="!user.isActive">
+                    {{ user.isActive ? 'Active' : 'Inactive' }}
+                  </span>
+                </div>
+              </div>
+              <div class="entity-actions">
+                <button class="btn btn-sm btn-outline-primary me-1" (click)="toggleUserStatus(user.id)">
+                  Toggle
+                </button>
+                <button class="btn btn-sm btn-outline-danger" (click)="deleteUser(user.id)">
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product Management -->
+    <div class="row mt-4">
+      <div class="col-md-6">
+        <div class="example-card">
+          <h5>Product Store Management</h5>
+          <div class="store-management">
+            <div class="add-form">
+              <h6>Add New Product:</h6>
+              <input type="text" [(ngModel)]="newProduct.name" class="form-control mb-2" placeholder="Product Name">
+              <input type="number" [(ngModel)]="newProduct.price" class="form-control mb-2" placeholder="Price">
+              <input type="text" [(ngModel)]="newProduct.category" class="form-control mb-2" placeholder="Category">
+              <textarea [(ngModel)]="newProduct.description" class="form-control mb-2" placeholder="Description" rows="2"></textarea>
+              <div class="form-check mb-2">
+                <input type="checkbox" [(ngModel)]="newProduct.inStock" class="form-check-input" id="productStock">
+                <label class="form-check-label" for="productStock">In Stock</label>
+              </div>
+              <button class="btn btn-success w-100" (click)="addProduct()">Add Product</button>
+            </div>
+            
+            <!-- Filter -->
+            <div class="filter-section mt-3">
+              <h6>Filter Products:</h6>
+              <input type="text" [(ngModel)]="productFilter" class="form-control mb-2" placeholder="Search by name">
+              <div class="row">
+                <div class="col-6">
+                  <label class="form-label">Min Price:</label>
+                  <input type="number" [(ngModel)]="priceRange.min" class="form-control">
+                </div>
+                <div class="col-6">
+                  <label class="form-label">Max Price:</label>
+                  <input type="number" [(ngModel)]="priceRange.max" class="form-control">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="example-card">
+          <h5>Products List ({{ getFilteredProducts().length }} / {{ getEntityCount(productStore) }})</h5>
+          <div class="entity-list">
+            <div class="entity-item" *ngFor="let product of getFilteredProducts()">
+              <div class="entity-info">
+                <strong>{{ product.name }}</strong> - ${{ product.price }}
+                <div class="entity-meta">
+                  <span class="badge bg-secondary me-1">{{ product.category }}</span>
+                  <span class="badge" [class.bg-success]="product.inStock" [class.bg-danger]="!product.inStock">
+                    {{ product.inStock ? 'In Stock' : 'Out of Stock' }}
+                  </span>
+                </div>
+                <div class="product-description">{{ product.description }}</div>
+              </div>
+              <div class="entity-actions">
+                <button class="btn btn-sm btn-outline-primary me-1" (click)="toggleProductStock(product.id)">
+                  Toggle Stock
+                </button>
+                <button class="btn btn-sm btn-outline-danger" (click)="deleteProduct(product.id)">
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Generic Constraints -->
+  <div class="section generic-constraints">
+    <h2>🔒 Generic Constraints</h2>
+    
+    <div class="row">
+      <div class="col-md-6">
+        <div class="example-card">
+          <h5>Constraint Examples</h5>
+          <div class="generic-display">
+            <div class="generic-code">
+              <pre><code>// Constraint: T must have an 'id' property
+class DataStore&lt;T extends &#123; id: number &#125;&gt; &#123;
+  // Implementation...
+&#125;
+
+// Constraint: K must be a key of T
+function getProperty&lt;T, K extends keyof T&gt;(
+  obj: T, 
+  key: K
+): T[K] &#123;
+  return obj[key];
+&#125;
+
+// Conditional type constraint
+type NonNullable&lt;T&gt; = T extends null | undefined ? never : T;</code></pre>
+            </div>
+            <div class="generic-data">
+              <h6>Constraint Benefits:</h6>
+              <ul class="constraint-benefits">
+                <li><strong>Type Safety:</strong> Prevents invalid type usage</li>
+                <li><strong>IntelliSense:</strong> Better IDE support</li>
+                <li><strong>Compile-time Checks:</strong> Catch errors early</li>
+                <li><strong>Code Clarity:</strong> Express intentions clearly</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="example-card">
+          <h5>Real-world Usage</h5>
+          <div class="generic-display">
+            <div class="usage-examples">
+              <div class="usage-item">
+                <h6>Type-safe Property Access:</h6>
+                <div class="property-list">
+                  <div *ngFor="let name of getUserNames()" class="property-item">
+                    <i class="bi bi-person"></i> {{ name }}
+                  </div>
+                </div>
+              </div>
+              
+              <div class="usage-item">
+                <h6>Unique Categories:</h6>
+                <div class="category-list">
+                  <span class="badge bg-info me-1" *ngFor="let category of getProductCategories()">
+                    {{ category }}
+                  </span>
+                </div>
+              </div>
+              
+              <div class="usage-item">
+                <h6>Store Statistics:</h6>
+                <div class="stats-summary">
+                  <div>Active Users: <strong>{{ getActiveUsersCount() }}</strong></div>
+                  <div>In Stock Products: <strong>{{ getInStockProductsCount() }}</strong></div>
+                  <div>Total Product Value: <strong>${{ getTotalProductValue() }}</strong></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- API Response Generation -->
+  <div class="section api-responses">
+    <h2>🌐 Generic API Responses</h2>
+    
+    <div class="row">
+      <div class="col-md-6">
+        <div class="example-card">
+          <h5>Generate API Responses</h5>
+          <div class="api-generator">
+            <div class="generator-buttons">
+              <button class="btn btn-primary me-2" (click)="createUserResponse()">
+                <i class="bi bi-people"></i> Get Users Response
+              </button>
+              <button class="btn btn-success" (click)="createProductResponse()">
+                <i class="bi bi-box"></i> Get Products Response
+              </button>
+            </div>
+            
+            <div class="response-code mt-3">
+              <pre><code>function createApiResponse&lt;T&gt;(
+  data: T, 
+  message: string = 'Success'
+): ApiResponse&lt;T&gt; &#123;
+  return &#123;
+    success: true,
+    message,
+    data,
+    timestamp: new Date(),
+    status: 200
+  &#125;;
+&#125;</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="example-card">
+          <h5>Type-safe Responses</h5>
+          <div class="response-examples">
+            <div class="response-item">
+              <h6>User Response Type:</h6>
+              <code>ApiResponse&lt;User[]&gt;</code>
+              <div class="response-preview">
+                <div><strong>Data Type:</strong> Array of Users</div>
+                <div><strong>Count:</strong> {{ userApiResponse.data.length }}</div>
+                <div><strong>Type Safety:</strong> ✅ Compile-time checked</div>
+              </div>
+            </div>
+            
+            <div class="response-item">
+              <h6>Product Response Type:</h6>
+              <code>ApiResponse&lt;Product&gt;</code>
+              <div class="response-preview">
+                <div><strong>Data Type:</strong> Single Product</div>
+                <div><strong>Product:</strong> {{ productApiResponse.data.name }}</div>
+                <div><strong>Type Safety:</strong> ✅ Compile-time checked</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Best Practices -->
+  <div class="section best-practices">
+    <h2>✅ Generic Best Practices</h2>
+    
+    <div class="row">
+      <div class="col-md-4">
+        <div class="practice-card">
+          <h6><i class="bi bi-check-circle text-success"></i> Do's</h6>
+          <ul>
+            <li>Use meaningful type parameter names (T, U, K)</li>
+            <li>Add constraints when needed</li>
+            <li>Prefer generic functions over any</li>
+            <li>Use default type parameters</li>
+            <li>Keep generics simple and focused</li>
+            <li>Document generic parameters</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="practice-card">
+          <h6><i class="bi bi-x-circle text-danger"></i> Don'ts</h6>
+          <ul>
+            <li>Don't overuse generics</li>
+            <li>Avoid complex nested generics</li>
+            <li>Don't use generics for simple cases</li>
+            <li>Avoid generic parameters without constraints</li>
+            <li>Don't sacrifice readability</li>
+            <li>Avoid generic abuse in templates</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="practice-card">
+          <h6><i class="bi bi-lightbulb text-warning"></i> Benefits</h6>
+          <ul>
+            <li>Type safety without type duplication</li>
+            <li>Reusable code across types</li>
+            <li>Better IDE IntelliSense</li>
+            <li>Compile-time error detection</li>
+            <li>Self-documenting code</li>
+            <li>Performance benefits</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

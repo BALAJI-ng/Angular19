@@ -1,0 +1,80 @@
+.demo-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.explanation-box {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+.explanation-box h2 {
+  margin-top: 0;
+  color: white;
+}
+
+.explanation-box ul {
+  margin: 15px 0;
+  padding-left: 20px;
+}
+
+.explanation-box li {
+  margin: 8px 0;
+  line-height: 1.6;
+}
+
+.usage-example {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.usage-example h2 {
+  color: #495057;
+  margin-top: 0;
+}
+
+.usage-example pre {
+  background-color: #343a40;
+  color: #f8f9fa;
+  padding: 15px;
+  border-radius: 5px;
+  overflow-x: auto;
+  margin: 10px 0;
+}
+
+.usage-example code {
+  font-family: "Courier New", monospace;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.console-tip {
+  background-color: #fff3cd;
+  border: 1px solid #ffeaa7;
+  border-radius: 5px;
+  padding: 15px;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.console-tip p {
+  margin: 0;
+  color: #856404;
+  font-weight: 500;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+  font-size: 2.5em;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}

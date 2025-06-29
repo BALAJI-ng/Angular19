@@ -1,0 +1,299 @@
+.spread-operator-container {
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 30px;
+  background: linear-gradient(135deg, #007bff 0%, #6610f2 100%);
+  color: white;
+  border-radius: 15px;
+}
+
+.page-header h1 {
+  margin-bottom: 15px;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.page-header .lead {
+  font-size: 1.2rem;
+  margin-bottom: 0;
+  opacity: 0.9;
+}
+
+.section {
+  margin: 40px 0;
+  padding: 30px;
+  background-color: #f8f9fa;
+  border-radius: 15px;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+}
+
+.section h2 {
+  color: #495057;
+  margin-bottom: 25px;
+  font-weight: 600;
+  border-bottom: 2px solid #dee2e6;
+  padding-bottom: 10px;
+}
+
+.example-card {
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  transition: transform 0.3s ease;
+  border-left: 4px solid #007bff;
+}
+
+.example-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.example-card h5 {
+  color: #007bff;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.array-display,
+.merge-display,
+.object-display {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.array-item,
+.merge-item,
+.object-item {
+  padding: 8px 0;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.array-item:last-child,
+.merge-item:last-child,
+.object-item:last-child {
+  border-bottom: none;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.code-example {
+  background: #2d3748;
+  color: #e2e8f0;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.code-example h6 {
+  color: #e2e8f0;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.code-example pre {
+  background: #1a202c;
+  color: #e6edf3;
+  padding: 15px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 0;
+  border: 1px solid #30363d;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.todo-container {
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  border-left: 4px solid #28a745;
+  transition: all 0.3s ease;
+}
+
+.todo-item:hover {
+  background: #e9ecef;
+  transform: translateX(5px);
+}
+
+.todo-item.completed {
+  border-left-color: #6c757d;
+  opacity: 0.7;
+}
+
+.todo-content {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.todo-stats {
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.todo-stats h6 {
+  color: #495057;
+  margin-bottom: 15px;
+  font-weight: 600;
+  border-bottom: 2px solid #dee2e6;
+  padding-bottom: 8px;
+}
+
+.stat-item {
+  padding: 8px 0;
+  border-bottom: 1px solid #dee2e6;
+  font-size: 0.95rem;
+}
+
+.stat-item:last-child {
+  border-bottom: none;
+}
+
+.practices-card {
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  height: 100%;
+}
+
+.practices-card h5 {
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.practices-list {
+  padding-left: 20px;
+  list-style-type: none;
+}
+
+.practices-list li {
+  position: relative;
+  padding: 8px 0;
+  padding-left: 25px;
+  line-height: 1.5;
+}
+
+.practices-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #007bff;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.benefit-card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.benefit-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.benefit-card h6 {
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.benefit-card p {
+  color: #6c757d;
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.badge {
+  font-size: 0.9rem;
+  padding: 6px 12px;
+  font-weight: 500;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .spread-operator-container {
+    padding: 10px;
+  }
+
+  .page-header h1 {
+    font-size: 2rem;
+  }
+
+  .section {
+    padding: 20px;
+    margin: 20px 0;
+  }
+
+  .controls {
+    justify-content: center;
+  }
+
+  .controls .btn {
+    margin: 2px;
+  }
+
+  .todo-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .todo-content {
+    width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .page-header {
+    padding: 20px;
+  }
+
+  .example-card,
+  .todo-container,
+  .todo-stats {
+    padding: 15px;
+  }
+
+  .code-example {
+    padding: 15px;
+  }
+
+  .code-example pre {
+    padding: 10px;
+    font-size: 0.8rem;
+  }
+}

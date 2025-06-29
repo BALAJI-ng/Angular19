@@ -1,0 +1,390 @@
+<div class="spread-operator-container">
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1><i class="bi bi-three-dots text-primary"></i> Spread Operator Examples</h1>
+        <p class="lead">Comprehensive demonstrations of the JavaScript/TypeScript spread operator (...) in Angular</p>
+    </div>
+
+    2014 Balaji <br>
+    {{oldBalaji | json}} <br><br>
+
+    2024 Balaji <br>
+    {{newBalaji | json}} <br>
+    <button (click)="addSkill()" class="btn btn-sm btn-info mb-3">
+        <i class="bi bi-plus-circle"></i> Add Skill
+    </button><br><br>
+
+    userArray1: {{ myArray1 | json }} <br>
+    <button (click)="Increment()" class="btn btn-sm btn-success mb-3 me-2">
+        <i class="bi bi-plus-circle"></i> Add More Items
+    </button>
+
+    <button (click)="decrement()" class="btn btn-sm btn-warning mb-3 me-2">
+        <i class="bi bi-dash-circle"></i> Remove Items
+    </button>
+    <button (click)="reset()" class="btn btn-sm btn-secondary mb-3">
+        <i class="bi bi-arrow-clockwise"></i> Reset Items
+    </button><br><br>
+
+    <!-- Custom Examples Section -->
+    <div class="section custom-examples">
+        <h2>🎯 Your Custom Examples</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="example-card">
+                    <h5>Custom Array Operations</h5>
+                    <div class="custom-display">
+                        <strong>Current Array:</strong> {{ myArray1 | json }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="example-card">
+                    <h5>Find Maximum</h5>
+                    <div class="custom-display">
+                        <strong>Numbers:</strong> {{ myNumbers | json }}<br>
+                        <strong>Max Value:</strong> {{ findMax }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="example-card">
+                    <h5>Balaji Object Updates</h5>
+                    <div class="custom-display">
+                        <strong>Original:</strong> {{ oldBalaji.name }} ({{ oldBalaji.age }})<br>
+                        <strong>Updated:</strong> {{ newBalaji.name }} ({{ newBalaji.age }})<br>
+                        <strong>Skill:</strong> {{ newBalaji.skill || 'Not added yet' }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Array Examples -->
+    <div class="section array-examples">
+        <h2>📋 Array Spread Examples</h2>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="example-card">
+                    <h5>Original vs Copied Arrays</h5>
+                    <div class="array-display">
+                        <div class="array-item">
+                            <strong>Original Array:</strong>
+                            <span class="badge bg-primary ms-2">{{ myOriginalArray | json }}</span>
+                        </div>
+                        <div class="array-item">
+                            <strong>Copied Array:</strong>
+                            <span class="badge bg-success ms-2">{{ myCopiedArray | json }}</span>
+                        </div>
+                    </div>
+
+                    <div class="controls mt-3">
+                        <button class="btn btn-primary btn-sm me-2" (click)="addToArray()">
+                            <i class="bi bi-plus"></i> Add Item
+                        </button>
+                        <button class="btn btn-warning btn-sm me-2" (click)="removeFromArray()">
+                            <i class="bi bi-dash"></i> Remove Item
+                        </button>
+                        <button class="btn btn-secondary btn-sm" (click)="resetArray()">
+                            <i class="bi bi-arrow-clockwise"></i> Reset
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="example-card">
+                    <h5>Array Merging</h5>
+                    <div class="merge-display">
+                        <div class="merge-item">
+                            <strong>Fruits:</strong> {{ fruits | json }}
+                        </div>
+                        <div class="merge-item">
+                            <strong>Vegetables:</strong> {{ vegetables | json }}
+                        </div>
+                        <div class="merge-item">
+                            <strong>Groceries:</strong> {{ groceries | json }}
+                        </div>
+                    </div>
+
+                    <div class="controls mt-3">
+                        <button class="btn btn-success btn-sm" (click)="mergeArrays()">
+                            <i class="bi bi-plus-circle"></i> Add More Fruits
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-12">
+                <div class="code-example">
+                    <h6>💻 Array Spread Code Examples:</h6>
+                    <pre><code>// Copying arrays
+const original = [1, 2, 3];
+const copied = [...original];  // Creates a new array
+
+// Merging arrays
+const fruits = ['apple', 'banana'];
+const vegetables = ['carrot', 'broccoli'];
+const groceries = [...fruits, ...vegetables];
+
+// Function arguments
+const numbers = [1, 2, 3, 4, 5];
+const max = Math.max(...numbers);  // Max: {{ maxNumber }}</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngFor="let emp of listOfEmployees; index as index" class="employee-list mb-4">
+        <div class="employee-item">
+            <strong>Name:</strong> {{ emp.name }}
+            <strong>Position:</strong> {{ emp.position }}
+            <strong>Department:</strong> {{ emp.department }}
+            <strong>Email:</strong> {{ emp.email }}
+            delete
+            <button (click)="deleteEmployee(emp.id)" class="btn btn-sm btn-danger ms-3">
+                <i class="bi bi-trash"></i> Delete
+            </button>
+            <button (click)="tooggleEmployeeEmail(emp.id)" class="btn btn-sm btn-secondary ms-3">
+                <i class="bi bi-envelope"></i> Toggle Email
+            </button>
+        </div>
+    </div>
+    <button (click)="addEmployee()" class="btn btn-sm btn-info mb-3">
+        <i class="bi bi-plus-circle"></i> Add Employee
+    </button>
+    <br><br>
+    <button (click)="addEmployee1()">Add Emp</button>
+    <div *ngFor="let emp of listOfBofaEmployee">
+        <p>{{emp.id}}</p>
+        <p>{{emp.name1}}</p>
+        <p>{{emp.email}}</p>
+        <p>{{emp.courseCompleted}}</p>
+        <button (click)="updateEmployee1(emp.id)">CC Completed</button>
+        <button (click)="deleteEmployee1(emp.id)">Delete</button>
+    </div>
+
+
+    <!-- Object Examples -->
+    <div class="section object-examples">
+        <h2>🏷️ Object Spread Examples</h2>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="example-card">
+                    <h5>Original User</h5>
+                    <div class="object-display">
+                        <div class="object-item">
+                            <strong>name:</strong> {{ originalUser.name }}
+                        </div>
+                        <div class="object-item">
+                            <strong>age:</strong> {{ originalUser.age }}
+                        </div>
+                        <div class="object-item">
+                            <strong>city:</strong> {{ originalUser.city }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="example-card">
+                    <h5>Copied User</h5>
+                    <div class="object-display">
+                        <div class="object-item">
+                            <strong>name:</strong> {{ copiedUser.name }}
+                        </div>
+                        <div class="object-item">
+                            <strong>age:</strong> {{ copiedUser.age }}
+                        </div>
+                        <div class="object-item">
+                            <strong>city:</strong> {{ copiedUser.city }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="example-card">
+                    <h5>Updated User</h5>
+                    <div class="object-display">
+                        <div class="object-item">
+                            <strong>name:</strong> {{ updatedUser.name }}
+                        </div>
+                        <div class="object-item">
+                            <strong>age:</strong> {{ updatedUser.age }}
+                        </div>
+                        <div class="object-item">
+                            <strong>city:</strong> {{ updatedUser.city }}
+                        </div>
+                        <div class="object-item" *ngIf="updatedUser.country">
+                            <strong>country:</strong> {{ updatedUser.country }}
+                        </div>
+                        <div class="object-item" *ngIf="updatedUser.email">
+                            <strong>email:</strong> {{ updatedUser.email }}
+                        </div>
+                    </div>
+
+                    <div class="controls mt-3">
+                        <button class="btn btn-primary btn-sm me-2" (click)="updateUserAge()">
+                            <i class="bi bi-plus"></i> +1 Age
+                        </button>
+                        <button class="btn btn-info btn-sm me-2" (click)="addUserProperty()">
+                            <i class="bi bi-envelope"></i> Add Email
+                        </button>
+                        <button class="btn btn-secondary btn-sm" (click)="resetUser()">
+                            <i class="bi bi-arrow-clockwise"></i> Reset
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-12">
+                <div class="code-example">
+                    <h6>💻 Object Spread Code Examples:</h6>
+                    <pre><code>// Copying objects
+const originalUser = &#123; name: 'John', age: 30, city: 'New York' &#125;;
+const copiedUser = &#123; ...originalUser &#125;;
+
+// Updating objects immutably
+const updatedUser = &#123; ...originalUser, age: 31, country: 'USA' &#125;;
+
+// Adding new properties
+const userWithEmail = &#123; ...updatedUser, email: 'john&#64;example.com' &#125;;</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Todo Management Example -->
+    <div class="section todo-examples">
+        <h2>✅ Todo Management with Spread</h2>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="todo-container">
+                    <div class="todo-controls mb-3">
+                        <button class="btn btn-success" (click)="addTodo()">
+                            <i class="bi bi-plus-circle"></i> Add Todo
+                        </button>
+                    </div>
+
+                    <div class="todo-list">
+                        <div class="todo-item" *ngFor="let todo of todos" [class.completed]="todo.completed">
+                            <div class="todo-content">
+                                <input type="checkbox" [checked]="todo.completed" (change)="toggleTodo(todo.id)"
+                                    class="form-check-input me-2">
+                                <span [class.text-decoration-line-through]="todo.completed">
+                                    {{ todo.text }}
+                                </span>
+                            </div>
+                            <button class="btn btn-sm btn-danger" (click)="removeTodo(todo.id)">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="todo-stats">
+                    <h6>📊 Todo Statistics</h6>
+                    <div class="stat-item">
+                        <strong>Total:</strong> {{ todos.length }}
+                    </div>
+                    <div class="stat-item">
+                        <strong>Completed:</strong> {{ getCompletedCount() }}
+                    </div>
+                    <div class="stat-item">
+                        <strong>Pending:</strong> {{ getPendingCount() }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-12">
+                <div class="code-example">
+                    <h6>💻 State Management with Spread:</h6>
+                    <pre><code>// Adding items immutably
+addTodo(): void &#123;
+  const newTodo = &#123; id: this.todos.length + 1, text: 'New Task', completed: false &#125;;
+  this.todos = [...this.todos, newTodo];
+&#125;
+
+// Updating items immutably
+toggleTodo(id: number): void &#123;
+  this.todos = this.todos.map(todo => 
+    todo.id === id ? &#123; ...todo, completed: !todo.completed &#125; : todo
+  );
+&#125;
+
+// Removing items immutably
+removeTodo(id: number): void &#123;
+  this.todos = this.todos.filter(todo => todo.id !== id);
+&#125;</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Best Practices -->
+    <div class="section best-practices">
+        <h2>🎯 Best Practices & Benefits</h2>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="practices-card">
+                    <h5>✅ Do's</h5>
+                    <ul class="practices-list">
+                        <li>Use spread for immutable updates</li>
+                        <li>Copy arrays before modifications</li>
+                        <li>Merge objects with spread syntax</li>
+                        <li>Use with function arguments</li>
+                        <li>Combine with destructuring</li>
+                        <li>Use for state management</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="practices-card">
+                    <h5>❌ Don'ts</h5>
+                    <ul class="practices-list">
+                        <li>Don't use for deep cloning</li>
+                        <li>Avoid with circular references</li>
+                        <li>Don't overuse in performance-critical code</li>
+                        <li>Avoid with large objects unnecessarily</li>
+                        <li>Don't rely on spread for complex state</li>
+                        <li>Don't forget type safety</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-md-4">
+                <div class="benefit-card">
+                    <h6><i class="bi bi-shield-check text-success"></i> Immutability</h6>
+                    <p>Creates new references, preventing accidental mutations</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="benefit-card">
+                    <h6><i class="bi bi-arrow-repeat text-primary"></i> Predictability</h6>
+                    <p>Makes state changes predictable and trackable</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="benefit-card">
+                    <h6><i class="bi bi-speedometer2 text-info"></i> Performance</h6>
+                    <p>Enables efficient change detection in Angular</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

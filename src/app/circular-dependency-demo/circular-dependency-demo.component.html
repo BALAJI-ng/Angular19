@@ -1,0 +1,238 @@
+<div class="circular-dependency-demo">
+  <div class="page-header">
+    <h1><i class="bi bi-arrow-repeat text-danger"></i> Circular Dependency Solutions</h1>
+    <p class="lead">Real-world scenario: User, Order, and Notification services</p>
+  </div>
+
+  <!-- Problem Explanation -->
+  <div class="problem-section">
+    <h2>🚨 The Problem: Circular Dependencies</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="problem-card">
+          <h5>❌ Problematic Architecture</h5>
+          <div class="dependency-chain">
+            <div class="service-box user">UserService</div>
+            <div class="arrow">↓ depends on</div>
+            <div class="service-box order">OrderService</div>
+            <div class="arrow">↓ depends on</div>
+            <div class="service-box notification">NotificationService</div>
+            <div class="arrow error">↑ depends on ❌</div>
+          </div>
+          <p class="mt-3"><strong>Result:</strong> Angular can't resolve dependencies!</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="solution-card">
+          <h5>✅ Event-Driven Solution</h5>
+          <div class="dependency-chain">
+            <div class="service-box user-fixed">UserService</div>
+            <div class="arrow">↓ publishes events</div>
+            <div class="service-box event-bus">EventBus</div>
+            <div class="arrow">↓ notifies</div>
+            <div class="service-box notification-fixed">NotificationService</div>
+          </div>
+          <p class="mt-3"><strong>Result:</strong> Clean, decoupled architecture!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Demo -->
+  <div class="demo-section">
+    <h2>🎮 Interactive Demo - Event-Driven Architecture</h2>
+
+    <div class="controls-section">
+      <h4>Test the Fixed Services:</h4>
+      <div class="action-buttons">
+        <button (click)="createUserFixed()" class="btn btn-primary me-2">
+          <i class="bi bi-person-plus"></i> Create User
+        </button>
+        <button (click)="createOrderFixed()" class="btn btn-success me-2">
+          <i class="bi bi-cart-plus"></i> Create Order
+        </button>
+        <button (click)="updateOrderStatusFixed()" class="btn btn-warning me-2">
+          <i class="bi bi-arrow-repeat"></i> Update Order
+        </button>
+        <button (click)="updateUserProfileFixed()" class="btn btn-info me-2">
+          <i class="bi bi-pencil"></i> Update User
+        </button>
+        <button (click)="clearEvents()" class="btn btn-secondary">
+          <i class="bi bi-trash"></i> Clear Events
+        </button>
+      </div>
+    </div>
+
+    <!-- Real-time Event Log -->
+    <div class="row mt-4">
+      <div class="col-md-6">
+        <div class="event-log">
+          <h5><i class="bi bi-broadcast"></i> Real-time Event Log</h5>
+          <div class="event-list">
+            <div *ngFor="let event of events; let i = index" class="event-item" [class.latest]="i === 0">
+              <div class="event-header">
+                <span class="event-type">{{formatEventType(event.type)}}</span>
+                <span class="event-time">{{event.timestamp | date:'medium'}}</span>
+              </div>
+              <div class="event-payload">
+                <pre>{{event.payload | json}}</pre>
+              </div>
+            </div>
+            <div *ngIf="events.length === 0" class="no-events">
+              No events yet. Try clicking the action buttons above!
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="data-display">
+          <h5><i class="bi bi-database"></i> Current Data State</h5>
+
+          <!-- Users Tab -->
+          <div class="data-section">
+            <h6>👥 Users ({{usersFixed.length}})</h6>
+            <div class="data-list">
+              <div *ngFor="let user of usersFixed" class="data-item">
+                <strong>{{user.name}}</strong> - {{user.email}}
+                <span class="badge bg-primary ms-2">ID: {{user.id}}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Orders Tab -->
+          <div class="data-section">
+            <h6>🛒 Orders ({{ordersFixed.length}})</h6>
+            <div class="data-list">
+              <div *ngFor="let order of ordersFixed" class="data-item">
+                <strong>Order #{{order.id}}</strong> - ${{order.total}}
+                <span class="badge" [class.bg-success]="order.status === 'delivered'"
+                  [class.bg-primary]="order.status === 'shipped'" [class.bg-warning]="order.status === 'processing'"
+                  [class.bg-secondary]="order.status === 'pending'">
+                  {{order.status}}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Notifications Tab -->
+          <div class="data-section">
+            <h6>🔔 Notifications ({{notificationsFixed.length}})</h6>
+            <div class="data-list">
+              <div *ngFor="let notification of notificationsFixed.slice(0, 5)" class="data-item">
+                <div class="notification-content">
+                  <span class="badge" [class.bg-success]="notification.type === 'success'"
+                    [class.bg-info]="notification.type === 'info'" [class.bg-warning]="notification.type === 'warning'"
+                    [class.bg-danger]="notification.type === 'error'">
+                    {{notification.type}}
+                  </span>
+                  <small>{{notification.message}}</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Code Examples -->
+  <div class="code-section">
+    <h2>💻 Code Solutions</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="code-example">
+          <h5>❌ Problematic Code</h5>
+          <pre><code>// ❌ Creates circular dependency
+&#64;Injectable()
+export class NotificationService &#123;
+  constructor(
+    private userService: UserService,
+    private orderService: OrderService // Circular!
+  ) &#123;&#125;
+
+  sendOrderNotification(orderId: number) &#123;
+    const order = this.orderService.getById(orderId);
+    // This creates circular dependency chain
+  &#125;
+&#125;</code></pre>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="code-example">
+          <h5>✅ Event-Driven Solution</h5>
+          <pre><code>// ✅ No circular dependencies
+&#64;Injectable()
+export class NotificationService &#123;
+  constructor(private eventBus: EventBusService) &#123;
+    this.subscribeToEvents();
+  &#125;
+  
+  private subscribeToEvents() &#123;
+    this.eventBus.subscribe('ORDER_CREATED')
+      .subscribe(event => &#123;
+        this.createNotification(event.payload);
+      &#125;);
+  &#125;
+&#125;</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Solutions Summary -->
+  <div class="solutions-section">
+    <h2>🛠️ Circular Dependency Solutions</h2>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="solution-item">
+          <h5>🚌 Event Bus Pattern</h5>
+          <p>Use a central event bus for communication between services. Services publish events and subscribe to
+            relevant events.</p>
+          <div class="pros-cons">
+            <div class="pros">
+              <strong>✅ Pros:</strong>
+              <ul>
+                <li>Complete decoupling</li>
+                <li>Easy to test</li>
+                <li>Scalable</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="solution-item">
+          <h5>💉 Lazy Injection</h5>
+          <p>Use Angular's <code>Injector</code> to resolve dependencies at runtime instead of constructor injection.
+          </p>
+          <div class="pros-cons">
+            <div class="pros">
+              <strong>✅ Pros:</strong>
+              <ul>
+                <li>Simple to implement</li>
+                <li>No architecture changes</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="solution-item">
+          <h5>🔗 Interface Segregation</h5>
+          <p>Create smaller, focused services and use composition instead of inheritance.</p>
+          <div class="pros-cons">
+            <div class="pros">
+              <strong>✅ Pros:</strong>
+              <ul>
+                <li>Better separation of concerns</li>
+                <li>More testable</li>
+                <li>Follows SOLID principles</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

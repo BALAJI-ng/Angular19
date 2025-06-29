@@ -1,0 +1,172 @@
+<div class="signals-page">
+    <div class="page-header">
+        <h1><i class="bi bi-lightning text-warning"></i> Angular Signals</h1>
+        <p class="lead">Explore Angular's new reactive primitive with signals and computed signals!</p>
+    </div>
+
+    <div class="signals-container">
+        <div class="signal-display">
+            <h6>Signal Value:</h6>
+            <div class="signal-value">{{mySignal()}}</div>
+        </div>
+
+        <div class="signal-controls"> <button (click)="decrementSignal()" class="btn btn-danger me-2">
+                <i class="bi bi-dash-circle"></i> Decrement
+            </button>
+            <button (click)="incrementSignal()" class="btn btn-primary me-2">
+                <i class="bi bi-plus-circle"></i> Increment
+            </button>
+            <button (click)="resetSignal()" class="btn btn-secondary me-2">
+                <i class="bi bi-arrow-clockwise"></i> Reset
+            </button>
+            <div class="btn-group ms-2">
+                <button (click)="setSpecialValue(42)" class="btn btn-info btn-sm">
+                    Set 42
+                </button>
+                <button (click)="setSpecialValue(100)" class="btn btn-success btn-sm">
+                    Set 100
+                </button>
+                <button (click)="setSpecialValue(-15)" class="btn btn-warning btn-sm">
+                    Set -15
+                </button>
+            </div>
+        </div>
+
+        <!-- Computed Signals Display -->
+        <div class="computed-signals">
+            <h6>📊 Computed Signals:</h6>
+            <div class="row">
+                <div class="col-md-6 col-lg-3">
+                    <div class="computed-card">
+                        <div class="computed-label">Double Value</div>
+                        <div class="computed-value">{{doubleValue()}}</div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="computed-card">
+                        <div class="computed-label">Is Even?</div>
+                        <div class="computed-value" [class.text-success]="isEven()" [class.text-warning]="!isEven()">
+                            {{isEven() ? 'Yes' : 'No'}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="computed-card">
+                        <div class="computed-label">Squared</div>
+                        <div class="computed-value">{{squaredValue()}}</div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="computed-card">
+                        <div class="computed-label">Status</div>
+                        <div class="computed-value status-badge" [class.status-zero]="signalStatus() === 'Zero'"
+                            [class.status-positive]="signalStatus() === 'Positive'"
+                            [class.status-negative]="signalStatus() === 'Negative'"
+                            [class.status-high]="signalStatus() === 'High'">
+                            {{signalStatus()}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Effects Display Section -->
+        <div class="effects-section">
+            <h6>⚡ Signal Effects in Action:</h6>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="effect-card">
+                        <h6><i class="bi bi-journal-text"></i> Change History</h6>
+                        <div class="effect-content">
+                            <div *ngFor="let change of changeHistory(); let i = index" class="history-item"
+                                [class.latest]="i === changeHistory().length - 1">
+                                {{change}}
+                            </div>
+                            <div *ngIf="changeHistory().length === 0" class="text-muted">
+                                No changes yet...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="effect-card">
+                        <h6><i class="bi bi-clock-history"></i> Effect Logs</h6>
+                        <div class="effect-content">
+                            <div *ngFor="let log of effectLog(); let i = index" class="log-item"
+                                [class.latest]="i === effectLog().length - 1">
+                                {{log}}
+                            </div>
+                            <div *ngIf="effectLog().length === 0" class="text-muted">
+                                No logs yet...
+                            </div>
+                        </div>
+                        <button (click)="clearLogs()" class="btn btn-sm btn-outline-secondary mt-2">
+                            Clear Logs
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12">
+                    <div class="effect-info">
+                        <strong>💡 Effects Demo:</strong>
+                        <ul class="mb-0">
+                            <li>📱 <strong>Console Logging:</strong> Check browser console for real-time logs</li>
+                            <li>💾 <strong>LocalStorage:</strong> Value automatically saved to browser storage</li>
+                            <li>🎯 <strong>Special Values:</strong> Try clicking "Set 42", "Set 100", or "Set -15" for
+                                alerts</li>
+                            <li>📊 <strong>Change Tracking:</strong> History of all signal changes displayed above</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="signal-info">
+            <small class="text-muted">
+                <strong>🎯 How it works:</strong> The main signal updates using <code>signal.update()</code> and
+                <strong>computed signals automatically recalculate</strong> when dependencies change!
+            </small>
+        </div>
+
+        <!-- Additional Info Section -->
+        <div class="info-section">
+            <h3>📚 Understanding Angular Signals</h3>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="info-card">
+                        <h5>🎯 What are Signals?</h5>
+                        <ul>
+                            <li>Reactive primitive for state management</li>
+                            <li>Automatically track dependencies</li>
+                            <li>Efficient change detection</li>
+                            <li>Works great with OnPush strategy</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="info-card">
+                        <h5>⚡ Computed Signals</h5>
+                        <ul>
+                            <li>Derived from other signals</li>
+                            <li>Auto-update when dependencies change</li>
+                            <li>Memoized for performance</li>
+                            <li>Lazy evaluation</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="info-card">
+                        <h5>🔄 Signal Effects</h5>
+                        <ul>
+                            <li>Handle side effects when signals change</li>
+                            <li>Run automatically on signal updates</li>
+                            <li>Perfect for logging, storage, API calls</li>
+                            <li>Clean up resources automatically</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

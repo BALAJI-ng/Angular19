@@ -1,0 +1,31 @@
+<div class="demo-container">
+    <h1>ViewChild vs ContentChild - Minimal Example</h1>
+
+    <div class="explanation-box">
+        <h2>🔍 Key Differences:</h2>
+        <ul>
+            <li><strong>ViewChild:</strong> References components declared in the parent's template</li>
+            <li><strong>ContentChild:</strong> References components projected via &lt;ng-content&gt;</li>
+        </ul>
+    </div>
+
+    <!-- Usage Example -->
+    <div class="usage-example">
+        <h2>📋 Usage Example:</h2>
+        <pre><code>
+&lt;app-parent&gt;
+  &lt;app-child&gt;&lt;/app-child&gt;  &lt;!-- This becomes ContentChild --&gt;
+&lt;/app-parent&gt;
+    </code></pre>
+    </div>
+
+    <!-- Actual Demo -->
+    <app-parent>
+        <!-- This app-child will be projected and accessible via @ContentChild -->
+        <app-child></app-child>
+    </app-parent>
+
+    <div class="console-tip">
+        <p><strong>💡 Tip:</strong> Open browser console to see the lifecycle logs!</p>
+    </div>
+</div>

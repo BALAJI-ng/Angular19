@@ -1,0 +1,206 @@
+<div class="container-fluid p-4">
+    <h2 class="mb-4">ng-container & ng-template Demo</h2>
+
+    <!-- Navigation Tabs -->
+    <ul class="nav nav-tabs mb-4">
+        <li class="nav-item">
+            <button class="nav-link" [class.active]="currentView === 'button-demo'" (click)="switchView('button-demo')">
+                Button States Demo
+            </button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" [class.active]="currentView === 'card-view'" (click)="switchView('card-view')">
+                Card Template
+            </button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" [class.active]="currentView === 'list-view'" (click)="switchView('list-view')">
+                List Template
+            </button>
+        </li>
+    </ul>
+
+    <!-- Main Content Area -->
+    <div class="row">
+        <div class="col-lg-8">
+            <!-- Dynamic Template Outlet -->
+            <div class="template-container" [ngClass]="{
+             'processing': isProcessing,
+             'success': currentState === 'done',
+             'initial': currentState === 'initial'
+           }">
+                <!-- ng-container with *ngTemplateOutlet - The main demonstration -->
+                <ng-container *ngTemplateOutlet="currentTemplate || null; context: { 
+          $implicit: user, 
+          products: products, 
+          state: currentState 
+        }">
+                </ng-container>
+            </div>
+
+            <!-- Controls for Button Demo -->
+            <div class="mt-4" *ngIf="currentView === 'button-demo'">
+                <div class="d-flex gap-2">
+                    <button class="btn btn-primary" (click)="saveData()" [disabled]="isProcessing">
+                        {{ isProcessing ? 'Processing...' : 'Start Process' }}
+                    </button>
+                    <button class="btn btn-secondary" (click)="resetDemo()" [disabled]="isProcessing">
+                        Reset Demo
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Information Sidebar -->
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Current State</h5>
+                </div>
+                <div class="card-body">
+                    <div class="state-indicator mb-3">
+                        <span class="badge" [ngClass]="{
+                    'bg-secondary': currentState === 'initial',
+                    'bg-warning': currentState === 'working',
+                    'bg-success': currentState === 'done'
+                  }">
+                            {{ currentState | titlecase }}
+                        </span>
+                    </div>
+
+                    <p><strong>View Mode:</strong> {{ currentView | titlecase }}</p>
+                    <p><strong>Processing:</strong> {{ isProcessing ? 'Yes' : 'No' }}</p>
+
+                    <hr>
+
+                    <h6>ng-template Features:</h6>
+                    <ul class="small">
+                        <li>Dynamic template switching</li>
+                        <li>Context data passing</li>
+                        <li>Conditional rendering</li>
+                        <li>Template reusability</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Default Templates for Button Demo -->
+<ng-template #defaultInitialTemplate let-user let-products="products">
+    <div class="template-content initial-state">
+        <div class="text-center p-5">
+            <i class="bi bi-play-circle display-1 text-primary mb-3"></i>
+            <h3>Ready to Start</h3>
+            <p class="text-muted">Click the "Start Process" button to begin the demonstration</p>
+            <div class="badge bg-light text-dark">Initial State Template</div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #defaultWorkingTemplate let-user let-products="products">
+    <div class="template-content working-state">
+        <div class="text-center p-5">
+            <div class="spinner-border text-warning mb-3" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <h3>Processing...</h3>
+            <p class="text-muted">Please wait while we process your request</p>
+            <div class="progress mb-3">
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" style="width: 60%">
+                </div>
+            </div>
+            <div class="badge bg-warning">Working State Template</div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #defaultDoneTemplate let-user let-products="products">
+    <div class="template-content done-state">
+        <div class="text-center p-5">
+            <i class="bi bi-check-circle display-1 text-success mb-3"></i>
+            <h3>Process Complete!</h3>
+            <p class="text-muted">Your operation has been successfully completed</p>
+            <div class="alert alert-success">
+                <strong>Success!</strong> The template has been dynamically updated.
+            </div>
+            <div class="badge bg-success">Done State Template</div>
+        </div>
+    </div>
+</ng-template>
+
+<!-- Card View Template -->
+<ng-template #cardTemplate let-user let-products="products">
+    <div class="template-content">
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">User Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-title">{{ user.name }}</h6>
+                        <p class="card-text">
+                            <i class="bi bi-envelope"></i> {{ user.email }}<br>
+                            <i class="bi bi-briefcase"></i> {{ user.role }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-header bg-info text-white">
+                        <h5 class="mb-0">Quick Stats</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row text-center">
+                            <div class="col">
+                                <h4 class="text-primary">{{ products.length }}</h4>
+                                <small class="text-muted">Products</small>
+                            </div>
+                            <div class="col">
+                                <h4 class="text-success">${{ getTotalValue() }}</h4>
+                                <small class="text-muted">Total Value</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="badge bg-info">Card Template via ng-template</div>
+    </div>
+</ng-template>
+
+<!-- List View Template -->
+<ng-template #listTemplate let-user let-products="products">
+    <div class="template-content">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Product List</h5>
+                <span class="badge bg-primary">{{ products.length }} items</span>
+            </div>
+            <div class="card-body p-0">
+                <div class="list-group list-group-flush">
+                    <div class="list-group-item" *ngFor="let product of products; let i = index">
+                        <div class="d-flex w-100 justify-content-between align-items-center">
+                            <div>
+                                <h6 class="mb-1">{{ product.name }}</h6>
+                                <small class="text-muted">{{ product.category }}</small>
+                            </div>
+                            <div class="text-end">
+                                <span class="badge bg-success">${{ product.price }}</span>
+                                <small class="d-block text-muted">ID: {{ product.id }}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-3">
+            <div class="badge bg-secondary">List Template via ng-template</div>
+        </div>
+    </div>
+</ng-template>

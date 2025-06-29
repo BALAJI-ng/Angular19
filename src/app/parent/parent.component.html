@@ -1,0 +1,35 @@
+<div class="parent-component">
+    <h2>ViewChild vs ContentChild Demo</h2>
+    <!-- ViewChild Section -->
+    <div class="section">
+        <h3>1. ViewChild (declared in template)</h3>
+        <p class="explanation">
+            This child component is declared directly in the parent's template using <code>&lt;app-child&gt;</code>
+        </p>
+        <!-- This child will be accessible via @ViewChild -->
+        <app-child></app-child>
+        <div class="controls">
+            <button (click)="incrementViewChild()" class="btn btn-success">
+                Increment ViewChild from Parent
+            </button>
+            <p class="status">ViewChild Message: {{ viewChildMessage }}</p>
+        </div>
+    </div>
+    <!-- ContentChild Section -->
+    <div class="section">
+        <h3>2. ContentChild (projected content)</h3>
+        <p class="explanation">
+            This content is projected from outside using <code>&lt;ng-content&gt;</code>
+        </p>
+        <!-- This is where projected content appears -->
+        <div class="projected-content">
+            <ng-content></ng-content>
+        </div>
+        <div class="controls">
+            <button (click)="incrementContentChild()" class="btn btn-warning">
+                Increment ContentChild from Parent
+            </button>
+            <p class="status">ContentChild Message: {{ contentChildMessage }}</p>
+        </div>
+    </div>
+</div>

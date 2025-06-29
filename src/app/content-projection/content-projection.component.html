@@ -1,0 +1,219 @@
+<div class="p-4">
+    <h2>Content Projection Example</h2>
+
+    ViewChild Vs ContentChild
+    <app-parent>
+        <app-child></app-child>
+    </app-parent>
+
+    <div class="mb-3">
+        <button type="button" class="btn btn-primary px-4 me-2" (click)="openPopup()" [disabled]="showPopUp">
+            {{showPopUp ? 'Popup is Open' : 'Show Pop Up'}}
+        </button>
+
+        <!-- ViewChild approach buttons -->
+        <button type="button" class="btn btn-success px-4 me-2" (click)="togglePopupViaViewChild()">
+            Toggle via ViewChild
+        </button>
+        <button type="button" class="btn btn-info px-4 me-2" (click)="closePopupViaViewChild()" [disabled]="!showPopUp">
+            Close via ViewChild
+        </button>
+        <button type="button" class="btn btn-secondary px-4" (click)="checkPopupStatus()">
+            Check Status
+        </button>
+    </div>
+    <div class="alert" [class.alert-success]="whatIsStatusNow === 'Popup is now closed'"
+        [class.alert-info]="whatIsStatusNow !== 'Popup is now closed'">
+        <strong>Status:</strong> {{whatIsStatusNow}}
+    </div>
+
+    <!-- Explanation of approaches -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h6 class="mb-0">🔔 EventEmitter Approach</h6>
+                </div>
+                <div class="card-body">
+                    <p class="small mb-2"><strong>How it works:</strong></p>
+                    <ul class="small mb-2">
+                        <li>Child emits events via &#64;Output</li>
+                        <li>Parent listens via (close)="handler($event)"</li>
+                        <li>Loose coupling between components</li>
+                    </ul>
+                    <p class="text-success small mb-0"><strong>Best for:</strong> Reusable components, clean
+                        architecture</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h6 class="mb-0">🎯 ViewChild Approach</h6>
+                </div>
+                <div class="card-body">
+                    <p class="small mb-2"><strong>How it works:</strong></p>
+                    <ul class="small mb-2">
+                        <li>Parent gets direct reference to child</li>
+                        <li>Direct access to child properties/methods</li>
+                        <li>Tight coupling, more control</li>
+                    </ul>
+                    <p class="text-info small mb-0"><strong>Best for:</strong> Forms, complex parent-child interactions
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <app-popup-window-ng-content [isOpen]="showPopUp" (close)="messageFromChild($event)"
+        title="Content Projection Example">
+        <h5>This is projected content!</h5>
+        <p>This content is passed from the parent component into the popup using <code>&lt;ng-content&gt;</code>.</p>
+        <p>You can include any HTML content here:</p>
+        <ul>
+            <li>Lists</li>
+            <li>Images</li>
+            <li>Other components</li>
+            <li>Any Angular template content</li>
+        </ul>
+        <div class="alert alert-warning">
+            <strong>Note:</strong> This demonstrates Angular's content projection feature!
+        </div>
+
+        <body>
+            <p>This is the body content of the popup.</p>
+        </body>
+        <footer>
+            <button type="button" class="btn btn-secondary" (click)="showPopUp = false">Close</button>
+        </footer>
+    </app-popup-window-ng-content>
+</div>
+
+<div class="mt-4">
+    <h3>ViewChild Demonstration</h3>
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">ViewChild Component</h5>
+        </div>
+        <div class="card-body">
+            <app-view-child></app-view-child>
+            <hr>
+            <div class="alert alert-info">
+                <strong>Data from ViewChild:</strong> {{ getFromViewChild }}
+            </div>
+            <div class="mb-2">
+                <button class="btn btn-sm btn-success me-2" (click)="refreshViewChildData()">
+                    Refresh ViewChild Data
+                </button>
+                <button class="btn btn-sm btn-warning" (click)="updateChildMessage()">
+                    Update Child & Refresh
+                </button>
+            </div>
+            <small class="text-muted">
+                This demonstrates how a parent component can access child component properties using &#64;ViewChild
+            </small>
+        </div>
+    </div>
+</div>
+
+<div class="mt-4">
+    <h3>ContentChild Demonstration</h3>
+    <div class="row">
+        <div class="col-lg-8">
+            <!-- ContentChild component with projected content -->
+            <app-content-child>
+                <!-- This content will be projected into the ContentChild component -->
+                <h6>🎯 Projected Content Examples:</h6>
+
+                <div class="mb-3">
+                    <!-- Projected button with template reference -->
+                    <button #projectedButton class="btn btn-primary me-2">
+                        I'm a Projected Button!
+                    </button>
+
+                    <!-- Projected special content -->
+                    <div #specialContent class="badge bg-info">
+                        Special projected content with reference
+                    </div>
+                </div>
+
+                <!-- Projected template -->
+                <ng-template #projectedTemplate>
+                    <div class="alert alert-success">
+                        <h6>🎉 This is a projected template!</h6>
+                        <p class="mb-0">Templates can also be projected and accessed via ContentChild.</p>
+                    </div>
+                </ng-template>
+
+                <!-- More projected content -->
+                <div class="mt-3">
+                    <p class="text-muted">
+                        All of this content is being projected into the
+                        <code>&lt;app-content-child&gt;</code> component using
+                        <code>&lt;ng-content&gt;</code>.
+                    </p>
+                    <div class="d-flex gap-2">
+                        <span class="badge bg-secondary">Projected Badge 1</span>
+                        <span class="badge bg-warning">Projected Badge 2</span>
+                        <span class="badge bg-danger">Projected Badge 3</span>
+                    </div>
+                </div>
+            </app-content-child>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header bg-warning text-dark">
+                    <h6 class="mb-0">🎛️ ContentChild Controls</h6>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <strong>Status:</strong>
+                        <div class="badge bg-info">{{ contentChildStatus }}</div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-sm btn-primary" (click)="interactWithContentChild()">
+                            Trigger ContentChild Method
+                        </button>
+                        <button class="btn btn-sm btn-info" (click)="checkContentChildStatus()">
+                            Check ContentChild Status
+                        </button>
+                    </div>
+
+                    <hr>
+
+                    <div class="mt-3">
+                        <h6>ContentChild vs ViewChild:</h6>
+                        <ul class="small">
+                            <li><strong>ViewChild:</strong> Accesses child components in template</li>
+                            <li><strong>ContentChild:</strong> Accesses projected content</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-4">
+    <h3>ng-container & ng-template Example</h3>
+
+    <app-ng-container-ng-template [initialTemplate]="save" [workingTemplate]="saving" [doneTemplate]="saved">
+
+    </app-ng-container-ng-template>
+
+    <ng-template #save>
+        Save
+    </ng-template>
+
+    <ng-template #saving>
+        <img src="https://github.com/alcfeoh/ng-advanced-workshop/raw/master/src/assets/loader.gif" style="width: 20px">
+    </ng-template>
+
+    <ng-template #saved>
+        Saved! </ng-template>
+
+
+
+</div>

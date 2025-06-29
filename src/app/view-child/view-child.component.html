@@ -1,0 +1,16 @@
+<div class="p-3 bg-light border rounded">
+    <h6>🔍 ViewChild Component</h6>
+    <p class="mb-2">This is a child component that contains data:</p>
+    <div class="alert alert-success mb-2">
+        <strong>Child Property:</strong> {{ myVariableBalajiForViewChild }}
+    </div>
+    <div class="mb-2">
+        <button class="btn btn-sm btn-primary" (click)="updateMessage()">
+            Update Message
+        </button>
+        <small class="ms-2 text-muted">Last updated: {{ getCurrentTime() }}</small>
+    </div>
+    <small class="text-muted">
+        This data can be accessed by the parent component using &#64;ViewChild
+    </small>
+</div>

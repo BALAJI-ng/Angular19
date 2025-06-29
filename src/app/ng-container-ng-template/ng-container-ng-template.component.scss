@@ -1,0 +1,214 @@
+// Main container styling
+.container-fluid {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  min-height: 100vh;
+}
+
+// Navigation tabs styling
+.nav-tabs {
+  border-bottom: 2px solid #dee2e6;
+
+  .nav-link {
+    border: none;
+    color: #6c757d;
+    font-weight: 500;
+    transition: all 0.3s ease;
+
+    &:hover {
+      color: #007bff;
+      border-color: transparent;
+    }
+
+    &.active {
+      background: linear-gradient(135deg, #007bff, #0056b3);
+      color: white;
+      border-radius: 8px 8px 0 0;
+      border: none;
+    }
+  }
+}
+
+// Template container styling
+.template-container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.4s ease;
+  overflow: hidden;
+
+  &.processing {
+    transform: scale(1.02);
+    box-shadow: 0 12px 40px rgba(255, 193, 7, 0.3);
+    border-color: #ffc107;
+  }
+
+  &.success {
+    transform: scale(1.02);
+    box-shadow: 0 12px 40px rgba(40, 167, 69, 0.3);
+    border-color: #28a745;
+  }
+
+  &.initial {
+    box-shadow: 0 8px 32px rgba(0, 123, 255, 0.15);
+  }
+}
+
+// Template content styling
+.template-content {
+  padding: 2rem;
+  min-height: 300px;
+
+  &.initial-state {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+
+    .display-1 {
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  &.working-state {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+
+    .spinner-border {
+      width: 3rem;
+      height: 3rem;
+    }
+  }
+
+  &.done-state {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+
+    .display-1 {
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+  }
+}
+
+// Card enhancements
+.card {
+  border: none;
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-header {
+    border-radius: 12px 12px 0 0;
+    border-bottom: none;
+    font-weight: 600;
+  }
+}
+
+// List group enhancements
+.list-group-item {
+  border: none;
+  border-bottom: 1px solid #f8f9fa;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #f8f9fa;
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+// Button enhancements
+.btn {
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+}
+
+// Badge enhancements
+.badge {
+  font-size: 0.8rem;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+// State indicator
+.state-indicator {
+  text-align: center;
+
+  .badge {
+    font-size: 1rem;
+    padding: 10px 20px;
+    animation: pulse 2s infinite;
+  }
+}
+
+// Progress bar animation
+.progress-bar-animated {
+  animation: progress-animation 1.5s linear infinite;
+}
+
+@keyframes progress-animation {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 30px 0;
+  }
+}
+
+// Pulse animation for badges
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+// Icon styling
+.bi {
+  font-size: 1.2em;
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .template-content {
+    padding: 1rem;
+    min-height: 250px;
+  }
+
+  .container-fluid {
+    padding: 1rem;
+  }
+
+  .nav-tabs .nav-link {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+// Glass morphism effect for sidebar
+.col-lg-4 .card {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+// Smooth transitions for all elements
+* {
+  transition: all 0.3s ease;
+}

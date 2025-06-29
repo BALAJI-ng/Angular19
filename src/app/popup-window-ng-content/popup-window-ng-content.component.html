@@ -1,0 +1,15 @@
+<div class="modalW" *ngIf="isOpen">
+
+    <!-- Modal content -->
+    <div class="modalW-content">
+        <div class="modalW-header">
+            <h2 class="text-center flex-grow-1">{{title}}</h2>
+            <span class="close" (click)="closePopup()">&times;</span>
+        </div>
+        <div class="modalW-body">
+            <ng-content></ng-content>
+            <ng-content select="[body]"></ng-content>
+            <ng-content select="[footer]"></ng-content>
+        </div>
+    </div>
+</div>

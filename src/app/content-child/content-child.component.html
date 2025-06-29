@@ -1,0 +1,83 @@
+<div class="card">
+    <div class="card-header bg-info text-white">
+        <h5 class="mb-0">📥 ContentChild Demonstration</h5>
+    </div>
+    <div class="card-body">
+        <div class="alert alert-primary">
+            <h6>🎯 Content Projected into this Component:</h6>
+            <p class="mb-2">This component uses <code>&#64;ContentChild</code> to access content projected from the
+                parent.</p>
+        </div>
+
+        <!-- Information about projected content -->
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card bg-light">
+                    <div class="card-body">
+                        <h6 class="card-title">📍 Projected Button</h6>
+                        <p class="small">{{ projectedButtonText }}</p>
+                        <button class="btn btn-sm btn-secondary" (click)="onProjectedButtonClick()"
+                            [disabled]="!projectedButton">
+                            Change Button Style
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card bg-light">
+                    <div class="card-body">
+                        <h6 class="card-title">📝 Projected Template</h6>
+                        <p class="small">
+                            {{ hasProjectedTemplate ? 'Template found and rendered below' : 'No template projected' }}
+                        </p>
+                        <span class="badge" [class.bg-success]="hasProjectedTemplate"
+                            [class.bg-secondary]="!hasProjectedTemplate">
+                            {{ hasProjectedTemplate ? 'Available' : 'Not Found' }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card bg-light">
+                    <div class="card-body">
+                        <h6 class="card-title">⭐ Special Content</h6>
+                        <p class="small">{{ specialContentText }}</p>
+                        <small class="text-muted">Content with #specialContent reference</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- Display projected content -->
+        <div class="projected-content-area">
+            <h6>🔍 Projected Content Display:</h6>
+
+            <!-- This is where the projected content will appear -->
+            <div class="border p-3 bg-light rounded">
+                <ng-content></ng-content>
+            </div>
+
+            <!-- Display projected template if available -->
+            <div class="mt-3" *ngIf="hasProjectedTemplate">
+                <h6>📋 Projected Template Rendered:</h6>
+                <div class="border p-3 bg-warning rounded">
+                    <ng-container *ngTemplateOutlet="projectedTemplate"></ng-container>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- Debug information -->
+        <div class="mt-3">
+            <h6>🐛 Debug Information:</h6>
+            <div class="bg-dark text-light p-2 rounded">
+                <small>{{ getProjectedButtonInfo() }}</small>
+            </div>
+        </div>
+    </div>
+</div>
