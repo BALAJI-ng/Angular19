@@ -2,7 +2,7 @@
   padding: 20px;
   max-width: 1400px;
   margin: 0 auto;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .page-header {
@@ -88,7 +88,7 @@
 }
 
 .generic-code code {
-  font-family: 'Fira Code', 'Courier New', monospace;
+  font-family: "Fira Code", "Courier New", monospace;
 }
 
 .generic-data {
@@ -477,45 +477,45 @@
   .generics-container {
     padding: 15px;
   }
-  
+
   .page-header {
     padding: 20px;
   }
-  
+
   .page-header h1 {
     font-size: 2rem;
   }
-  
+
   .section {
     padding: 20px;
     margin: 20px 0;
   }
-  
+
   .example-card {
     padding: 20px;
     margin-bottom: 20px;
   }
-  
+
   .generic-code pre {
     font-size: 0.8rem;
     padding: 12px;
   }
-  
+
   .entity-item {
     flex-direction: column;
     align-items: stretch;
     gap: 15px;
   }
-  
+
   .entity-actions {
     flex-direction: row;
     justify-content: flex-end;
   }
-  
+
   .stats-grid {
     grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
   }
-  
+
   .generator-buttons {
     flex-direction: column;
   }
@@ -548,13 +548,15 @@
 }
 
 // Form styling
-.form-control, .form-select {
+.form-control,
+.form-select {
   border: 1px solid #dee2e6;
   border-radius: 6px;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.form-control:focus, .form-select:focus {
+.form-control:focus,
+.form-select:focus {
   border-color: #007bff;
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
@@ -564,20 +566,20 @@
   .keyword {
     color: #c792ea;
   }
-  
+
   .string {
     color: #c3e88d;
   }
-  
+
   .number {
     color: #f78c6c;
   }
-  
+
   .comment {
     color: #546e7a;
     font-style: italic;
   }
-  
+
   .type {
     color: #82aaff;
   }

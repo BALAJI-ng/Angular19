@@ -8,7 +8,7 @@
   <!-- Basic Generics Concepts -->
   <div class="section basic-generics">
     <h2>🔧 Basic Generic Concepts</h2>
-    
+
     <div class="row">
       <div class="col-md-6">
         <div class="example-card">
@@ -30,8 +30,9 @@ type ProductResponse = ApiResponse&lt;Product&gt;;</code></pre>
             <div class="generic-data">
               <h6>User API Response:</h6>
               <div class="response-display">
-                <div><strong>Success:</strong> 
-                  <span class="badge" [class.bg-success]="userApiResponse.success" [class.bg-danger]="!userApiResponse.success">
+                <div><strong>Success:</strong>
+                  <span class="badge" [class.bg-success]="userApiResponse.success"
+                    [class.bg-danger]="!userApiResponse.success">
                     {{ userApiResponse.success }}
                   </span>
                 </div>
@@ -92,7 +93,7 @@ type ProductResponse = ApiResponse&lt;Product&gt;;</code></pre>
   <!-- Generic Functions -->
   <div class="section generic-functions">
     <h2>⚡ Generic Functions</h2>
-    
+
     <div class="row">
       <div class="col-md-6">
         <div class="example-card">
@@ -162,7 +163,7 @@ function getProperty&lt;T, K extends keyof T&gt;(
   <!-- Interactive Generic Store -->
   <div class="section interactive-store">
     <h2>🎮 Interactive Generic Data Store</h2>
-    
+
     <!-- User Management -->
     <div class="row">
       <div class="col-md-6">
@@ -184,7 +185,7 @@ function getProperty&lt;T, K extends keyof T&gt;(
               </div>
               <button class="btn btn-success w-100" (click)="addUser()">Add User</button>
             </div>
-            
+
             <!-- Filter -->
             <div class="filter-section mt-3">
               <h6>Filter Users:</h6>
@@ -233,14 +234,15 @@ function getProperty&lt;T, K extends keyof T&gt;(
               <input type="text" [(ngModel)]="newProduct.name" class="form-control mb-2" placeholder="Product Name">
               <input type="number" [(ngModel)]="newProduct.price" class="form-control mb-2" placeholder="Price">
               <input type="text" [(ngModel)]="newProduct.category" class="form-control mb-2" placeholder="Category">
-              <textarea [(ngModel)]="newProduct.description" class="form-control mb-2" placeholder="Description" rows="2"></textarea>
+              <textarea [(ngModel)]="newProduct.description" class="form-control mb-2" placeholder="Description"
+                rows="2"></textarea>
               <div class="form-check mb-2">
                 <input type="checkbox" [(ngModel)]="newProduct.inStock" class="form-check-input" id="productStock">
                 <label class="form-check-label" for="productStock">In Stock</label>
               </div>
               <button class="btn btn-success w-100" (click)="addProduct()">Add Product</button>
             </div>
-            
+
             <!-- Filter -->
             <div class="filter-section mt-3">
               <h6>Filter Products:</h6>
@@ -293,7 +295,7 @@ function getProperty&lt;T, K extends keyof T&gt;(
   <!-- Generic Constraints -->
   <div class="section generic-constraints">
     <h2>🔒 Generic Constraints</h2>
-    
+
     <div class="row">
       <div class="col-md-6">
         <div class="example-card">
@@ -342,7 +344,7 @@ type NonNullable&lt;T&gt; = T extends null | undefined ? never : T;</code></pre>
                   </div>
                 </div>
               </div>
-              
+
               <div class="usage-item">
                 <h6>Unique Categories:</h6>
                 <div class="category-list">
@@ -351,7 +353,7 @@ type NonNullable&lt;T&gt; = T extends null | undefined ? never : T;</code></pre>
                   </span>
                 </div>
               </div>
-              
+
               <div class="usage-item">
                 <h6>Store Statistics:</h6>
                 <div class="stats-summary">
@@ -370,7 +372,7 @@ type NonNullable&lt;T&gt; = T extends null | undefined ? never : T;</code></pre>
   <!-- API Response Generation -->
   <div class="section api-responses">
     <h2>🌐 Generic API Responses</h2>
-    
+
     <div class="row">
       <div class="col-md-6">
         <div class="example-card">
@@ -384,7 +386,7 @@ type NonNullable&lt;T&gt; = T extends null | undefined ? never : T;</code></pre>
                 <i class="bi bi-box"></i> Get Products Response
               </button>
             </div>
-            
+
             <div class="response-code mt-3">
               <pre><code>function createApiResponse&lt;T&gt;(
   data: T, 
@@ -416,7 +418,7 @@ type NonNullable&lt;T&gt; = T extends null | undefined ? never : T;</code></pre>
                 <div><strong>Type Safety:</strong> ✅ Compile-time checked</div>
               </div>
             </div>
-            
+
             <div class="response-item">
               <h6>Product Response Type:</h6>
               <code>ApiResponse&lt;Product&gt;</code>
@@ -435,7 +437,7 @@ type NonNullable&lt;T&gt; = T extends null | undefined ? never : T;</code></pre>
   <!-- Best Practices -->
   <div class="section best-practices">
     <h2>✅ Generic Best Practices</h2>
-    
+
     <div class="row">
       <div class="col-md-4">
         <div class="practice-card">
@@ -450,7 +452,7 @@ type NonNullable&lt;T&gt; = T extends null | undefined ? never : T;</code></pre>
           </ul>
         </div>
       </div>
-      
+
       <div class="col-md-4">
         <div class="practice-card">
           <h6><i class="bi bi-x-circle text-danger"></i> Don'ts</h6>
@@ -464,7 +466,7 @@ type NonNullable&lt;T&gt; = T extends null | undefined ? never : T;</code></pre>
           </ul>
         </div>
       </div>
-      
+
       <div class="col-md-4">
         <div class="practice-card">
           <h6><i class="bi bi-lightbulb text-warning"></i> Benefits</h6>

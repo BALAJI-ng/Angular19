@@ -8,7 +8,7 @@
   <!-- Basic Utility Types -->
   <div class="section utility-types">
     <h2>🔧 Basic Utility Types</h2>
-    
+
     <div class="row">
       <div class="col-md-6">
         <div class="example-card">
@@ -58,8 +58,9 @@ type RequiredUser = Required&lt;User&gt;;
                 <div><strong>Name:</strong> {{ utilityExamples.requiredUser.name }}</div>
                 <div><strong>Email:</strong> {{ utilityExamples.requiredUser.email }}</div>
                 <div><strong>Age:</strong> {{ utilityExamples.requiredUser.age }}</div>
-                <div><strong>Active:</strong> 
-                  <span class="badge" [class.bg-success]="utilityExamples.requiredUser.isActive" [class.bg-secondary]="!utilityExamples.requiredUser.isActive">
+                <div><strong>Active:</strong>
+                  <span class="badge" [class.bg-success]="utilityExamples.requiredUser.isActive"
+                    [class.bg-secondary]="!utilityExamples.requiredUser.isActive">
                     {{ utilityExamples.requiredUser.isActive ? 'Yes' : 'No' }}
                   </span>
                 </div>
@@ -110,8 +111,9 @@ type UserWithoutIdAndDate = Omit&lt;User, 'id' | 'createdAt'&gt;;
                 <div><strong>Email:</strong> {{ utilityExamples.omitUser.email }}</div>
                 <div><strong>Age:</strong> {{ utilityExamples.omitUser.age }}</div>
                 <div><strong>Role:</strong> {{ utilityExamples.omitUser.role }}</div>
-                <div><strong>Active:</strong> 
-                  <span class="badge" [class.bg-success]="utilityExamples.omitUser.isActive" [class.bg-secondary]="!utilityExamples.omitUser.isActive">
+                <div><strong>Active:</strong>
+                  <span class="badge" [class.bg-success]="utilityExamples.omitUser.isActive"
+                    [class.bg-secondary]="!utilityExamples.omitUser.isActive">
                     {{ utilityExamples.omitUser.isActive ? 'Yes' : 'No' }}
                   </span>
                 </div>
@@ -127,7 +129,7 @@ type UserWithoutIdAndDate = Omit&lt;User, 'id' | 'createdAt'&gt;;
   <!-- Advanced Utility Types -->
   <div class="section advanced-types">
     <h2>🚀 Advanced Utility Types</h2>
-    
+
     <div class="row">
       <div class="col-md-6">
         <div class="example-card">
@@ -176,7 +178,7 @@ type ReadonlyUser = Readonly&lt;User&gt;;
   <!-- Interactive Examples -->
   <div class="section interactive-examples">
     <h2>🎮 Interactive Utility Types</h2>
-    
+
     <div class="row">
       <div class="col-md-6">
         <div class="example-card">
@@ -196,7 +198,7 @@ type ReadonlyUser = Readonly&lt;User&gt;;
               <input type="number" [(ngModel)]="partialUpdateForm.age" class="form-control" placeholder="New age">
             </div>
             <button class="btn btn-primary" (click)="updateUserPartially()">Update User Partially</button>
-            
+
             <div class="current-user mt-3">
               <h6>Current User:</h6>
               <div><strong>Name:</strong> {{ sampleUser.name }}</div>
@@ -218,7 +220,8 @@ type ReadonlyUser = Readonly&lt;User&gt;;
             </div>
             <div class="form-group mb-3">
               <label>Category (optional):</label>
-              <input type="text" [(ngModel)]="searchCriteria.category" class="form-control" placeholder="Search by category">
+              <input type="text" [(ngModel)]="searchCriteria.category" class="form-control"
+                placeholder="Search by category">
             </div>
             <div class="form-group mb-3">
               <label>In Stock (optional):</label>
@@ -297,7 +300,7 @@ type ReadonlyUser = Readonly&lt;User&gt;;
   <!-- Template Literal Types -->
   <div class="section template-literal">
     <h2>📝 Template Literal Types</h2>
-    
+
     <div class="row">
       <div class="col-md-6">
         <div class="example-card">
@@ -332,8 +335,9 @@ type UserFlags = &#123;
               <h6>User Property Flags:</h6>
               <div class="data-display">
                 <div *ngFor="let flag of objectKeys(userFlags)" class="flag-item">
-                  <strong>{{ flag }}:</strong> 
-                  <span class="badge" [class.bg-success]="getUserFlagValue(flag)" [class.bg-danger]="!getUserFlagValue(flag)">
+                  <strong>{{ flag }}:</strong>
+                  <span class="badge" [class.bg-success]="getUserFlagValue(flag)"
+                    [class.bg-danger]="!getUserFlagValue(flag)">
                     {{ getUserFlagValue(flag) ? 'Enabled' : 'Disabled' }}
                   </span>
                 </div>
@@ -348,7 +352,7 @@ type UserFlags = &#123;
   <!-- Conditional Types -->
   <div class="section conditional-types">
     <h2>🔀 Conditional Types</h2>
-    
+
     <div class="row">
       <div class="col-md-6">
         <div class="example-card">
@@ -399,7 +403,7 @@ type NumberCheck = IsArray&lt;number&gt;; // false</code></pre>
   <!-- Best Practices -->
   <div class="section best-practices">
     <h2>✅ Best Practices</h2>
-    
+
     <div class="row">
       <div class="col-md-4">
         <div class="practice-card">
@@ -414,7 +418,7 @@ type NumberCheck = IsArray&lt;number&gt;; // false</code></pre>
           </ul>
         </div>
       </div>
-      
+
       <div class="col-md-4">
         <div class="practice-card">
           <h6><i class="bi bi-lightbulb text-warning"></i> Common Patterns</h6>
@@ -428,7 +432,7 @@ type NumberCheck = IsArray&lt;number&gt;; // false</code></pre>
           </ul>
         </div>
       </div>
-      
+
       <div class="col-md-4">
         <div class="practice-card">
           <h6><i class="bi bi-star text-info"></i> Benefits</h6>

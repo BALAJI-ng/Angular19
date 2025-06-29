@@ -315,7 +315,7 @@ export class GenericsComponent implements OnInit {
 
   // Filtered Data using Generic Methods
   getFilteredUsers(): User[] {
-    return this.userStore.filter(user => 
+    return this.userStore.filter(user =>
       user.name.toLowerCase().includes(this.userFilter.toLowerCase()) ||
       user.email.toLowerCase().includes(this.userFilter.toLowerCase())
     );
@@ -334,14 +334,14 @@ export class GenericsComponent implements OnInit {
     // Clone example
     const originalUser = this.sampleUsers[0];
     const clonedUser = cloneObject(originalUser);
-    
+
     // Property access example
     const userName = getProperty(originalUser, 'name');
     const userEmail = getProperty(originalUser, 'email');
-    
+
     // Array to Map example
     const userMap = arrayToMap(this.sampleUsers, 'id');
-    
+
     // Store results
     this.functionResults = {
       originalUser,

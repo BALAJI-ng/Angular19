@@ -38,16 +38,16 @@ interface UtilityTypesShowcase {
   requiredUser: Required<User>;         // All properties required
   pickUser: Pick<User, 'id' | 'name' | 'email'>;  // Select specific properties
   omitUser: Omit<User, 'id' | 'createdAt'>;       // Exclude specific properties
-  
+
   // Advanced Utility Types
   recordType: Record<string, number>;   // Object with specific key-value types
   readonlyUser: Readonly<User>;         // All properties readonly
   nonNullable: NonNullable<string | null | undefined>; // Remove null/undefined
-  
+
   // Function-related Types
   parametersExample: Parameters<(user: User, id: number) => void>; // Function parameters
   returnTypeExample: ReturnType<() => User>; // Function return type
-  
+
   // Conditional Types
   excludeExample: Exclude<'a' | 'b' | 'c', 'a'>; // Exclude types from union
   extractExample: Extract<'a' | 'b' | 'c', 'a' | 'f'>; // Extract types from union
@@ -102,7 +102,7 @@ export class ReatingTypesFromTypesComponent implements OnInit {
   // Utility Types Examples
   utilityExamples: UtilityTypesShowcase = {
     // Partial - Makes all properties optional
-    partialUser: { 
+    partialUser: {
       name: 'Partial User',
       email: 'partial@example.com'
       // id, age, isActive, role, createdAt are optional
@@ -173,7 +173,7 @@ export class ReatingTypesFromTypesComponent implements OnInit {
   // Interactive examples
   partialUpdateForm: Partial<User> = {};
   searchCriteria: Partial<Product> = {};
-  
+
   // Form data for demonstrations
   newUser: Omit<User, 'id' | 'createdAt'> = {
     name: '',
@@ -220,10 +220,10 @@ export class ReatingTypesFromTypesComponent implements OnInit {
       // Simulate partial update
       const updatedUser = { ...this.sampleUser, ...this.partialUpdateForm };
       console.log('Partially updated user:', updatedUser);
-      
+
       // Update the sample user
       Object.assign(this.sampleUser, this.partialUpdateForm);
-      
+
       // Reset form
       this.partialUpdateForm = {};
     }
@@ -233,19 +233,19 @@ export class ReatingTypesFromTypesComponent implements OnInit {
     let filteredProducts = this.products;
 
     if (this.searchCriteria.name) {
-      filteredProducts = filteredProducts.filter(p => 
+      filteredProducts = filteredProducts.filter(p =>
         p.name.toLowerCase().includes(this.searchCriteria.name!.toLowerCase())
       );
     }
 
     if (this.searchCriteria.category) {
-      filteredProducts = filteredProducts.filter(p => 
+      filteredProducts = filteredProducts.filter(p =>
         p.category.toLowerCase().includes(this.searchCriteria.category!.toLowerCase())
       );
     }
 
     if (this.searchCriteria.inStock !== undefined) {
-      filteredProducts = filteredProducts.filter(p => 
+      filteredProducts = filteredProducts.filter(p =>
         p.inStock === this.searchCriteria.inStock
       );
     }
@@ -261,7 +261,7 @@ export class ReatingTypesFromTypesComponent implements OnInit {
         createdAt: new Date()
       };
       this.users = [...this.users, user];
-      
+
       // Reset form
       this.newUser = {
         name: '',
