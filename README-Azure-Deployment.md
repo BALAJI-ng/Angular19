@@ -44,10 +44,10 @@ In `azure-pipelines.yml`, update these variables:
 
 ```yaml
 variables:
-  containerRegistry: 'yourangularacr.azurecr.io'  # Your ACR name
-  azureSubscription: 'your-azure-subscription'    # Service connection name
-  webAppName: 'your-angular-app'                  # Base web app name
-  resourceGroupName: 'angular-app-rg'             # Resource group name
+  containerRegistry: "yourangularacr.azurecr.io" # Your ACR name
+  azureSubscription: "your-azure-subscription" # Service connection name
+  webAppName: "your-angular-app" # Base web app name
+  resourceGroupName: "angular-app-rg" # Resource group name
 ```
 
 ### 4. Create Pipeline in Azure DevOps
@@ -76,22 +76,26 @@ variables:
 ## Pipeline Stages
 
 ### Stage 1: Build and Test
+
 - Install Node.js dependencies
 - Run linting and tests
 - Build Angular application
 - Publish artifacts
 
 ### Stage 2: Docker
+
 - Build Docker image
 - Security scan with Trivy
 - Push to Azure Container Registry
 
 ### Stage 3: Deploy Development
+
 - Triggers on `develop` branch
 - Automatic deployment
 - Health check validation
 
 ### Stage 4: Deploy Production
+
 - Triggers on `main` branch
 - Manual approval gate
 - Blue-green deployment
@@ -100,12 +104,14 @@ variables:
 ## Environment-Specific Configurations
 
 ### Development Environment
+
 ```yaml
 - stage: Deploy_Dev
   condition: eq(variables['Build.SourceBranch'], 'refs/heads/develop')
 ```
 
 ### Production Environment
+
 ```yaml
 - stage: Deploy_Prod
   condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
@@ -153,42 +159,49 @@ Use the provided PowerShell script for local deployment:
 ## Additional Features
 
 ### Feature Flags
+
 Add feature flag support using Azure App Configuration:
 
 ```typescript
 // Add to environment files
 export const environment = {
   production: true,
-  appConfiguration: 'your-app-config-endpoint'
+  appConfiguration: "your-app-config-endpoint",
 };
 ```
 
 ### Blue-Green Deployment
+
 Configure deployment slots for zero-downtime deployments:
 
 ```yaml
 - task: AzureWebAppContainer@1
   inputs:
     deployToSlotOrASE: true
-    slotName: 'staging'
+    slotName: "staging"
 ```
 
 ### Auto-scaling
+
 Configure auto-scaling rules:
 
 ```json
 {
   "autoscaleSettings": {
     "enabled": true,
-    "profiles": [{
-      "rules": [{
-        "scaleAction": {
-          "direction": "Increase",
-          "type": "ChangeCount",
-          "value": "1"
-        }
-      }]
-    }]
+    "profiles": [
+      {
+        "rules": [
+          {
+            "scaleAction": {
+              "direction": "Increase",
+              "type": "ChangeCount",
+              "value": "1"
+            }
+          }
+        ]
+      }
+    ]
   }
 }
 ```

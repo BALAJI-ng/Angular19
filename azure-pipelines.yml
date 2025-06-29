@@ -1,4 +1,4 @@
-# Azure DevOps Pipeline for Angular Application with Docker
+# Azure DevOps Pipeline for Angular Application with Docker and Azure Container Apps
 trigger:
   branches:
     include:
@@ -14,15 +14,18 @@ trigger:
 
 variables:
   # Container Registry variables
-  containerRegistry: "your-container-registry.azurecr.io"
+  containerRegistry: "balaji-3888-registry.azurecr.io"
+  containerRegistryName: "balaji-3888-registry"
   imageRepository: "angular-frontend"
   dockerfilePath: "$(Build.SourcesDirectory)/Dockerfile"
   tag: "$(Build.BuildId)"
 
-  # Azure Web App variables
+  # Azure Container Apps variables
   azureSubscription: "your-azure-subscription"
-  webAppName: "your-angular-webapp"
   resourceGroupName: "your-resource-group"
+  containerAppName: "your-angular-app"
+  containerAppEnvironment: "your-app-env"
+  location: "East US"
 
   # Build variables
   vmImageName: "ubuntu-latest"

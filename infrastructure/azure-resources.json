@@ -11,11 +11,7 @@
     "environment": {
       "type": "string",
       "defaultValue": "dev",
-      "allowedValues": [
-        "dev",
-        "staging",
-        "prod"
-      ],
+      "allowedValues": ["dev", "staging", "prod"],
       "metadata": {
         "description": "Environment name"
       }
@@ -115,9 +111,7 @@
       ],
       "properties": {
         "numberOfWorkers": 1,
-        "defaultDocuments": [
-          "index.html"
-        ],
+        "defaultDocuments": ["index.html"],
         "netFrameworkVersion": "v4.0",
         "requestTracingEnabled": false,
         "remoteDebuggingEnabled": false,
@@ -143,9 +137,7 @@
         },
         "autoHealEnabled": false,
         "cors": {
-          "allowedOrigins": [
-            "*"
-          ],
+          "allowedOrigins": ["*"],
           "supportCredentials": false
         },
         "localMySqlEnabled": false,

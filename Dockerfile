@@ -14,13 +14,13 @@ RUN npm ci --only=production
 COPY . .
 
 # Build the Angular application
-RUN npm run build --prod
+RUN npm run build
 
 # Use Nginx to serve the application
 FROM nginx:alpine
 
 # Copy built application from build stage
-COPY --from=build /app/dist /usr/share/nginx/html
+COPY --from=build /app/dist/fe /usr/share/nginx/html
 
 # Copy custom nginx configuration
 COPY nginx.conf /etc/nginx/nginx.conf
