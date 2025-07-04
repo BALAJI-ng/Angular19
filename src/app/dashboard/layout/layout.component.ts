@@ -96,4 +96,9 @@ export class LayoutComponent {
     this.router.navigate(['/dashboard/generics']);
     this.setActiveLink('Generics');
   }
+
+  navigateToPlaywright() {
+    this.router.navigate(['/dashboard/playwright']);
+    this.setActiveLink('Playwright');
+  }
 }

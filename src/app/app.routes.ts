@@ -59,6 +59,10 @@ export const routes: Routes = [
             {
                 path: 'generics',
                 loadComponent: () => import('./generics/generics.component').then(m => m.GenericsComponent)
+            },
+            {
+                path: 'playwright',
+                loadComponent: () => import('./playwright/playwright.component').then(m => m.PlaywrightComponent)
             }
         ]
     },

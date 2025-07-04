@@ -143,6 +143,13 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" [class.active]="isActive('Playwright')" (click)="navigateToPlaywright()"
+                            style="cursor: pointer;">
+                            <i class="bi bi-play-circle text-primary"></i>
+                            Playwright E2E Testing
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" [class.active]="isActive('SeniorAngular')"
                             (click)="navigateToSeniorAngular()" style="cursor: pointer;">
                             <i class="bi bi-gear"></i>
