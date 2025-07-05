@@ -1,0 +1,31 @@
+<div class="simple-ngrx-container">
+    <h2>Simple NgRx User Management</h2>
+
+    <form [formGroup]="userForm" (ngSubmit)="finalSubmit()">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input id="name" type="text" formControlName="name" placeholder="Enter name" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input id="email" type="email" formControlName="email" placeholder="Enter email" class="form-control">
+        </div>
+        <button type="submit" [disabled]="userForm.invalid" class="btn btn-primary">
+            Add User
+        </button>
+    </form>
+
+    <div class="users-section">
+        <h3>Added Users</h3>
+        <div *ngIf="users$ | async as users">
+            <div *ngIf="users.length === 0" class="no-users">
+                No users added yet.
+            </div>
+            <ul *ngIf="users.length > 0" class="users-list">
+                <li *ngFor="let user of users; index as i" class="user-item">
+                    {{i + 1}}. {{user.name}} {{user.email}}
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

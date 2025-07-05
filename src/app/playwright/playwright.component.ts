@@ -82,7 +82,7 @@ test.describe('Sample Test Suite', () => {
   runTests() {
     this.isRunningTests = true;
     this.testResults = [];
-    
+
     // Simulate running tests
     const testNames = [
       'Home page loads correctly',

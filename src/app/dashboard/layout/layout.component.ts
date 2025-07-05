@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
+
 @Component({
   selector: 'app-layout',
-  imports: [CommonModule, RouterOutlet],
+  imports: [CommonModule, RouterOutlet,],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss'
 })
@@ -100,5 +101,25 @@ export class LayoutComponent {
   navigateToPlaywright() {
     this.router.navigate(['/dashboard/playwright']);
     this.setActiveLink('Playwright');
+  }
+
+  navigateToAlertDemo() {
+    this.router.navigate(['/dashboard/alert-demo']);
+    this.setActiveLink('AlertDemo');
+  }
+
+  navigateToErrorTest() {
+    this.router.navigate(['/dashboard/error-test']);
+    this.setActiveLink('ErrorTest');
+  }
+
+  navigateToReduxStore() {
+    this.router.navigate(['/dashboard/redux-store']);
+    this.setActiveLink('ReduxStore');
+  }
+
+  navigateToSimpleUserNgrx() {
+    this.router.navigate(['/dashboard/simple-user-ngrx']);
+    this.setActiveLink('SimpleUserNgrx');
   }
 }

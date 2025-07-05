@@ -1,0 +1,15 @@
+@if (showAlert && showMessage) {
+<div class="alert-container">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <div class="d-flex align-items-center">
+            <i class="bi bi-exclamation-triangle me-2"></i>
+            <div class="flex-grow-1">
+                <h6 class="alert-heading mb-1">{{ showAlert }}</h6>
+                <div class="alert-message">{{ showMessage }}</div>
+            </div>
+            <button type="button" class="btn-close" aria-label="Close" (click)="closeAlert()">
+            </button>
+        </div>
+    </div>
+</div>
+}

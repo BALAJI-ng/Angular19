@@ -63,7 +63,20 @@ export const routes: Routes = [
             {
                 path: 'playwright',
                 loadComponent: () => import('./playwright/playwright.component').then(m => m.PlaywrightComponent)
+            },
+            {
+                path: 'error-test',
+                loadComponent: () => import('./Error-Handling/Global/error-test/error-test.component').then(m => m.ErrorTestComponent)
+            },
+            {
+                path: 'redux-store',
+                loadComponent: () => import('./redux/redux-store/redux-store.component').then(m => m.ReduxStoreComponent)
+            },
+            {
+                path: 'simple-user-ngrx',
+                loadComponent: () => import('./simple-redux/simple-ngrx/simple-ngrx.component').then(m => m.SimpleNgrxComponent)
             }
+
         ]
     },
 ];

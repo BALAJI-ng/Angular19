@@ -150,10 +150,38 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" [class.active]="isActive('AlertDemo')" (click)="navigateToAlertDemo()"
+                            style="cursor: pointer;">
+                            <i class="bi bi-exclamation-triangle text-warning"></i>
+                            Alert Service Demo
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" [class.active]="isActive('SeniorAngular')"
                             (click)="navigateToSeniorAngular()" style="cursor: pointer;">
                             <i class="bi bi-gear"></i>
                             Component Architecture
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [class.active]="isActive('ErrorTest')" (click)="navigateToErrorTest()"
+                            style="cursor: pointer;">
+                            <i class="bi bi-bug text-danger"></i>
+                            Error Interceptor Test
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [class.active]="isActive('ReduxStore')" (click)="navigateToReduxStore()"
+                            style="cursor: pointer;">
+                            <i class="bi bi-database text-info"></i>
+                            Redux User Store
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [class.active]="isActive('SimpleUserNgrx')"
+                            (click)="navigateToSimpleUserNgrx()" style="cursor: pointer;">
+                            <i class="bi bi-person-plus text-success"></i>
+                            Simple User NgRx
                         </a>
                     </li>
                     <li class="nav-item">
