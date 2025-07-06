@@ -143,6 +143,20 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" [class.active]="isActive('Playwright')" (click)="navigateToPlaywright()"
+                            style="cursor: pointer;">
+                            <i class="bi bi-play-circle text-primary"></i>
+                            Playwright E2E Testing
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [class.active]="isActive('AlertDemo')" (click)="navigateToAlertDemo()"
+                            style="cursor: pointer;">
+                            <i class="bi bi-exclamation-triangle text-warning"></i>
+                            Alert Service Demo
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" [class.active]="isActive('UnionTypes')" (click)="navigateToUnionTypes()"
                             style="cursor: pointer;">
                             <i class="bi bi-union text-primary"></i>
@@ -171,6 +185,35 @@
                             Component Architecture
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [class.active]="isActive('ErrorTest')" (click)="navigateToErrorTest()"
+                            style="cursor: pointer;">
+                            <i class="bi bi-bug text-danger"></i>
+                            Error Interceptor Test
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [class.active]="isActive('ReduxStore')" (click)="navigateToReduxStore()"
+                            style="cursor: pointer;">
+                            <i class="bi bi-database text-info"></i>
+                            Redux User Store
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [class.active]="isActive('SimpleUserNgrx')"
+                            (click)="navigateToSimpleUserNgrx()" style="cursor: pointer;">
+                            <i class="bi bi-person-plus text-success"></i>
+                            Simple User NgRx
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [class.active]="isActive('NgrxFacadeAdaptor')"
+                            (click)="navigateToNgrxFacadeAdaptor()" style="cursor: pointer;">
+                            <i class="bi bi-person-plus text-success"></i>
+                            Ngrx Facade Adaptor
+                        </a>
+                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="#" (click)="setActiveLink('Settings')">
                             <i class="bi bi-sliders"></i>

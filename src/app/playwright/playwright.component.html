@@ -1,0 +1,203 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+          <h3 class="mb-0">
+            <i class="bi bi-play-circle me-2"></i>
+            Playwright E2E Testing
+          </h3>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <!-- Introduction Section -->
+            <div class="col-md-6">
+              <h4>What is Playwright?</h4>
+              <p class="text-muted">
+                Playwright is a modern end-to-end testing framework that allows you to test your web applications
+                across different browsers with a single API. It supports Chromium, Firefox, and WebKit browsers.
+              </p>
+
+              <h5>Key Features:</h5>
+              <div class="row">
+                @for (feature of playwrightFeatures; track feature.title) {
+                <div class="col-md-6 mb-3">
+                  <div class="card h-100">
+                    <div class="card-body">
+                      <h6 class="card-title">
+                        <span class="me-2">{{feature.icon}}</span>
+                        {{feature.title}}
+                      </h6>
+                      <p class="card-text small text-muted">{{feature.description}}</p>
+                    </div>
+                  </div>
+                </div>
+                }
+              </div>
+            </div>
+
+            <!-- Test Runner Section -->
+            <div class="col-md-6">
+              <h4>Test Runner</h4>
+              <div class="mb-3">
+                <label for="browserSelect" class="form-label">Select Browser:</label>
+                <select id="browserSelect" class="form-select" [(ngModel)]="selectedBrowser">
+                  <option value="chromium">{{getBrowserIcon('chromium')}} Chromium</option>
+                  <option value="firefox">{{getBrowserIcon('firefox')}} Firefox</option>
+                  <option value="webkit">{{getBrowserIcon('webkit')}} WebKit</option>
+                </select>
+              </div>
+
+              <button class="btn btn-success me-2" (click)="runTests()" [disabled]="isRunningTests">
+                @if (isRunningTests) {
+                <span class="spinner-border spinner-border-sm me-2"></span>
+                Running Tests...
+                } @else {
+                <i class="bi bi-play-fill me-2"></i>
+                Run Tests
+                }
+              </button>
+
+              <button class="btn btn-outline-secondary">
+                <i class="bi bi-eye me-2"></i>
+                View Reports
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Test Results Section -->
+  <div class="row mt-4">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">Test Results</h5>
+        </div>
+        <div class="card-body">
+          @if (testResults.length === 0) {
+          <div class="text-center py-4">
+            <i class="bi bi-play-circle display-1 text-muted"></i>
+            <p class="text-muted">No tests run yet. Click "Run Tests" to start testing.</p>
+          </div>
+          } @else {
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Status</th>
+                  <th>Test Name</th>
+                  <th>Duration</th>
+                  <th>Error</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (result of testResults; track result.name) {
+                <tr>
+                  <td>
+                    <span [class]="getStatusClass(result.status)">
+                      {{getStatusIcon(result.status)}}
+                      {{result.status | titlecase}}
+                    </span>
+                  </td>
+                  <td>{{result.name}}</td>
+                  <td>
+                    @if (result.duration) {
+                    <span class="badge bg-secondary">{{result.duration}}ms</span>
+                    } @else {
+                    <span class="text-muted">-</span>
+                    }
+                  </td>
+                  <td>
+                    @if (result.error) {
+                    <span class="text-danger small">{{result.error}}</span>
+                    } @else {
+                    <span class="text-muted">-</span>
+                    }
+                  </td>
+                </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sample Test Code Section -->
+  <div class="row mt-4">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">Sample Test Code</h5>
+        </div>
+        <div class="card-body">
+          <pre class="bg-light p-3 rounded"><code>{{sampleTestCode}}</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Best Practices Section -->
+  <div class="row mt-4">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">Best Practices</h5>
+        </div>
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            @for (practice of bestPractices; track practice) {
+            <li class="list-group-item">
+              <i class="bi bi-check-circle text-success me-2"></i>
+              {{practice}}
+            </li>
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Commands Section -->
+  <div class="row mt-4">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">Quick Commands</h5>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6">
+              <h6>Installation</h6>
+              <div class="bg-dark text-light p-3 rounded mb-3">
+                <code>npm install playwright/test</code>
+              </div>
+
+              <h6>Run Tests</h6>
+              <div class="bg-dark text-light p-3 rounded mb-3">
+                <code>npx playwright test</code>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <h6>Run in Headed Mode</h6>
+              <div class="bg-dark text-light p-3 rounded mb-3">
+                <code>npx playwright test --headed</code>
+              </div>
+
+              <h6>Open Test Report</h6>
+              <div class="bg-dark text-light p-3 rounded mb-3">
+                <code>npx playwright show-report</code>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

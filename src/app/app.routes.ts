@@ -61,14 +61,25 @@ export const routes: Routes = [
                 loadComponent: () => import('./generics/generics.component').then(m => m.GenericsComponent)
             },
             {
-                path: 'union-types',
-                loadComponent: () => import('./union-types/union-types.component').then(m => m.UnionTypesComponent)
+                path: 'playwright',
+                loadComponent: () => import('./playwright/playwright.component').then(m => m.PlaywrightComponent)
             },
             {
-                path: 'constructor-syntax',
-                loadComponent: () => import('./constructor-syntax/constructor-syntax.component').then(m => m.ConstructorSyntaxComponent)
+                path: 'error-test',
+                loadComponent: () => import('./Error-Handling/Global/error-test/error-test.component').then(m => m.ErrorTestComponent)
             },
-            { path: 'ngrx-form', loadComponent: () => import('./ngrx-form/ngrx-form.component').then(m => m.NgrxFormComponent) }
+            {
+                path: 'redux-store',
+                loadComponent: () => import('./redux/redux-store/redux-store.component').then(m => m.ReduxStoreComponent)
+            },
+            {
+                path: 'simple-user-ngrx',
+                loadComponent: () => import('./simple-redux/simple-ngrx/simple-ngrx.component').then(m => m.SimpleNgrxComponent)
+            },
+            {
+                path: 'ngrx-facade-adaptor',
+                loadComponent: () => import('./redux-facade-adapter/redux-facade-adapter.component').then(m => m.ReduxFacadeAdapterComponent)
+            }
 
         ]
     },
