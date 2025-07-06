@@ -11,7 +11,11 @@
     "test:e2e:headed": "playwright test --headed",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:debug": "playwright test --debug",
-    "test:e2e:report": "playwright show-report"
+    "test:e2e:report": "playwright show-report",
+    "json-server": "json-server --watch db.json --port 3000",
+    "json-server:delay": "json-server --watch db.json --port 3000 --delay 1000",
+    "start:all": "concurrently \"npm run json-server\" \"npm start\"",
+    "start:dev": "concurrently \"npm run json-server:delay\" \"ng serve -o\""
   },
   "private": true,
   "dependencies": {
@@ -26,8 +30,10 @@
     "@angular/platform-browser-dynamic": "^19.1.0",
     "@angular/router": "^19.1.0",
     "@ngrx/effects": "^19.2.1",
+    "@ngrx/entity": "^19.2.1",
     "@ngrx/store": "^19.2.1",
     "bootstrap": "^5.3.7",
+    "json-server": "^1.0.0-beta.3",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
@@ -38,6 +44,7 @@
     "@angular/compiler-cli": "^19.1.0",
     "@playwright/test": "^1.53.2",
     "@types/jasmine": "~5.1.0",
+    "concurrently": "^9.2.0",
     "jasmine-core": "~5.5.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",

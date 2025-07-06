@@ -122,4 +122,10 @@ export class LayoutComponent {
     this.router.navigate(['/dashboard/simple-user-ngrx']);
     this.setActiveLink('SimpleUserNgrx');
   }
+  navigateToNgrxFacadeAdaptor() {
+    this.router.navigate(['/dashboard/ngrx-facade-adaptor']);
+    this.setActiveLink('NgrxFacadeAdaptor');
+  }
+
+
 }

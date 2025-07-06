@@ -1,0 +1,50 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "John Doe",
+      "age": 30,
+      "email": "john.doe@example.com"
+    },
+    {
+      "id": "2",
+      "name": "Jane Smith",
+      "age": 25,
+      "email": "jane.smith@example.com"
+    },
+    {
+      "id": "3",
+      "name": "Bob Johnson",
+      "age": 35,
+      "email": "bob.johnson@example.com"
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "title": "Hello World",
+      "content": "This is a sample post",
+      "userId": "1"
+    },
+    {
+      "id": 2,
+      "title": "Angular 19 Features",
+      "content": "Exploring new features in Angular 19",
+      "userId": "2"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "postId": 1,
+      "content": "Great post!",
+      "author": "Alice"
+    },
+    {
+      "id": 2,
+      "postId": 1,
+      "content": "Thanks for sharing!",
+      "author": "Charlie"
+    }
+  ]
+}

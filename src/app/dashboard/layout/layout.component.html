@@ -185,6 +185,14 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" [class.active]="isActive('NgrxFacadeAdaptor')"
+                            (click)="navigateToNgrxFacadeAdaptor()" style="cursor: pointer;">
+                            <i class="bi bi-person-plus text-success"></i>
+                            Ngrx Facade Adaptor
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
                         <a class="nav-link" href="#" (click)="setActiveLink('Settings')">
                             <i class="bi bi-sliders"></i>
                             Settings

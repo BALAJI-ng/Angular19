@@ -75,6 +75,10 @@ export const routes: Routes = [
             {
                 path: 'simple-user-ngrx',
                 loadComponent: () => import('./simple-redux/simple-ngrx/simple-ngrx.component').then(m => m.SimpleNgrxComponent)
+            },
+            {
+                path: 'ngrx-facade-adaptor',
+                loadComponent: () => import('./redux-facade-adapter/redux-facade-adapter.component').then(m => m.ReduxFacadeAdapterComponent)
             }
 
         ]

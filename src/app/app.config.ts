@@ -6,7 +6,8 @@ import { counterReducer } from './state-managment/ngrx/store';
 import { userReducer } from './state-managment/ngrx/user.reducer';
 import { userReducer as userStoreReducer } from './redux/redux-store/user.reducer';
 import { httpGlobalInterceptorInterceptor } from './Error-Handling/Global/http-global-interceptor.interceptor';
-import { simpleUserReducer } from './simple-redux/simple-ngrx/store'
+import { simpleUserReducer } from './simple-redux/simple-ngrx/store';
+import { myreducer_facade_adapter } from './redux-facade-adapter/store';
 
 import { routes } from './app.routes';
 
@@ -19,7 +20,8 @@ export const appConfig: ApplicationConfig = {
       counter: counterReducer,
       user: userReducer,
       userStore: userStoreReducer,
-      simpleReducer: simpleUserReducer
+      simpleReducer: simpleUserReducer,
+      anyName: myreducer_facade_adapter
     })
   ]
 };

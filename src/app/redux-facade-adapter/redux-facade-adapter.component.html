@@ -1,0 +1,151 @@
+<div class="redux-facade-container">
+    <div class="header">
+        <h1>Redux Facade Adapter</h1>
+        <p class="subtitle">User Management with NgRx Store</p>
+    </div>
+
+    <div class="form-section">
+        <h2>Add New User</h2>
+        <form [formGroup]="userForm" (ngSubmit)="finalSubmit()" class="user-form">
+            <div class="form-group">
+                <label for="name" class="form-label">
+                    <i class="icon">👤</i>
+                    Name
+                </label>
+                <input id="name" type="text" placeholder="Please enter name" formControlName="name" class="form-input"
+                    [class.error]="userForm.get('name')?.invalid && userForm.get('name')?.touched">
+                <div *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched" class="error-message">
+                    Name is required
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="age" class="form-label">
+                    <i class="icon">🎂</i>
+                    Age
+                </label>
+                <input id="age" type="number" min="0" max="150" placeholder="Please enter age" formControlName="age"
+                    class="form-input" [class.error]="userForm.get('age')?.invalid && userForm.get('age')?.touched">
+                <div *ngIf="userForm.get('age')?.invalid && userForm.get('age')?.touched" class="error-message">
+                    <span *ngIf="userForm.get('age')?.errors?.['required']">Age is required</span>
+                    <span *ngIf="userForm.get('age')?.errors?.['min']">Age must be at least 0</span>
+                    <span *ngIf="userForm.get('age')?.errors?.['max']">Age must be less than 150</span>
+                    <span *ngIf="userForm.get('age')?.errors?.['pattern']">Age must be a valid number</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email" class="form-label">
+                    <i class="icon">📧</i>
+                    Email
+                </label>
+                <input id="email" type="email" placeholder="Please enter email" formControlName="email"
+                    class="form-input" [class.error]="userForm.get('email')?.invalid && userForm.get('email')?.touched">
+                <div *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched" class="error-message">
+                    <span *ngIf="userForm.get('email')?.errors?.['required']">Email is required</span>
+                    <span *ngIf="userForm.get('email')?.errors?.['email']">Please enter a valid email</span>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn" [disabled]="userForm.invalid" [class.disabled]="userForm.invalid">
+                <i class="icon">➕</i>
+                Add User
+            </button>
+        </form>
+    </div>
+
+  <div class="users-section">
+    <h2>Users List</h2>
+    
+    <!-- Stats Section -->
+    <div class="stats-section">
+      <div class="stat-card">
+        <i class="icon">👥</i>
+        <div class="stat-info">
+          <div class="stat-value">{{ usersCount$ | async }}</div>
+          <div class="stat-label">Total Users</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <i class="icon">📊</i>
+        <div class="stat-info">
+          <div class="stat-value">{{ getAverageAge() | async | number:'1.1-1' }}</div>
+          <div class="stat-label">Average Age</div>
+        </div>
+      </div>
+      <div class="stat-card loading" *ngIf="loading$ | async">
+        <i class="icon">⏳</i>
+        <div class="stat-info">
+          <div class="stat-value">Loading...</div>
+          <div class="stat-label">Processing</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Error Display -->
+    <div *ngIf="error$ | async as error" class="error-banner">
+      <i class="icon">❌</i>
+      <span>{{ error }}</span>
+    </div>
+
+    <!-- Selected User Display -->
+    <div *ngIf="selectedUser$ | async as selectedUser" class="selected-user-banner">
+      <i class="icon">👤</i>
+      <span>Selected: {{ selectedUser.name }} ({{ selectedUser.email }})</span>
+      <button (click)="clearSelection()" class="clear-btn">Clear</button>
+    </div>
+
+    <div class="users-container">
+      <div *ngIf="displayinHtml$ | async as users; else noUsers">
+        <div *ngIf="users.length === 0" class="no-users">
+          <i class="icon">📋</i>
+          <p>No users added yet. Add your first user above!</p>
+        </div>
+        <div *ngIf="users.length > 0" class="users-grid">
+          <div *ngFor="let user of users; index as i" class="user-card" 
+               [class.selected]="(selectedUser$ | async)?.id === user.id">
+            <div class="user-number">{{i + 1}}</div>
+            <div class="user-details">
+              <div class="user-info">
+                <i class="icon">👤</i>
+                <span class="label">Name:</span>
+                <span class="value">{{user.name}}</span>
+              </div>
+              <div class="user-info">
+                <i class="icon">🆔</i>
+                <span class="label">ID:</span>
+                <span class="value">{{user.id}}</span>
+              </div>
+              <div class="user-info">
+                <i class="icon">🎂</i>
+                <span class="label">Age:</span>
+                <span class="value">{{user.age}} years</span>
+              </div>
+              <div class="user-info">
+                <i class="icon">📧</i>
+                <span class="label">Email:</span>
+                <span class="value">{{user.email}}</span>
+              </div>
+            </div>
+            <div class="user-actions">
+              <button (click)="selectUser(user.id)" class="action-btn select-btn">
+                <i class="icon">👁️</i>
+                Select
+              </button>
+              <button (click)="deleteUser(user.id)" class="action-btn delete-btn">
+                <i class="icon">🗑️</i>
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ng-template #noUsers>
+        <div class="loading">
+          <i class="icon">⏳</i>
+          <p>Loading users...</p>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>
