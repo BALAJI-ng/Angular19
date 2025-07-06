@@ -143,6 +143,28 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" [class.active]="isActive('UnionTypes')" (click)="navigateToUnionTypes()"
+                            style="cursor: pointer;">
+                            <i class="bi bi-union text-primary"></i>
+                            TypeScript Union Types
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [class.active]="isActive('ConstructorSyntax')"
+                            (click)="navigateToConstructorSyntax()" style="cursor: pointer;">
+                            <i class="bi bi-building text-warning"></i>
+                            Constructor Syntax
+                        </a>
+                    </li>
+                    <!-- Add this in the navigation menu section -->
+                    <li class="nav-item">
+                        <a class="nav-link" [class.active]="activeLink === 'ngrx-form'" (click)="navigateToNgrxForm()"
+                            href="javascript:void(0)">
+                            <i class="bi bi-diagram-3 text-success"></i>
+                            <span>NgRx Form</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" [class.active]="isActive('SeniorAngular')"
                             (click)="navigateToSeniorAngular()" style="cursor: pointer;">
                             <i class="bi bi-gear"></i>

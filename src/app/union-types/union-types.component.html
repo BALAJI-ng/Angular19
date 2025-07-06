@@ -1,0 +1,171 @@
+<div class="union-types-container">
+    <h1>TypeScript Union Types Examples</h1>
+
+    <!-- Basic Union Types Section -->
+    <section class="example-section">
+        <h2>1. Basic Union Types</h2>
+
+        <div class="example-card">
+            <h3>Status Union Type</h3>
+            <div class="status-display">
+                <span class="status-badge" [style.background-color]="getStatusColor(currentStatus)">
+                    Current Status: {{ currentStatus }}
+                </span>
+            </div>
+            <div class="button-group">
+                <button (click)="setStatus('idle')" class="btn btn-secondary">Idle</button>
+                <button (click)="setStatus('loading')" class="btn btn-primary">Loading</button>
+                <button (click)="setStatus('success')" class="btn btn-success">Success</button>
+                <button (click)="setStatus('error')" class="btn btn-danger">Error</button>
+            </div>
+        </div>
+
+        <div class="example-card">
+            <h3>Theme Union Type</h3>
+            <div class="theme-display">
+                <span class="theme-badge">
+                    {{ getThemeIcon(currentTheme) }} {{ currentTheme }}
+                </span>
+            </div>
+            <div class="button-group">
+                <button (click)="updateTheme('light')" class="btn btn-outline-warning">☀️ Light</button>
+                <button (click)="updateTheme('dark')" class="btn btn-outline-dark">🌙 Dark</button>
+                <button (click)="updateTheme('auto')" class="btn btn-outline-info">🔄 Auto</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- String or Number Union -->
+    <section class="example-section">
+        <h2>2. String | Number Union Type</h2>
+
+        <div class="example-card">
+            <h3>ID Processing</h3>
+            <div class="id-examples">
+                <div class="id-item">
+                    <strong>User ID:</strong> {{ userId }}
+                    <span class="processed">(Processed: {{ processId(userId) }})</span>
+                </div>
+                <div class="id-item">
+                    <strong>Product ID:</strong> {{ productId }}
+                    <span class="processed">(Processed: {{ processId(productId) }})</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- User Role Union -->
+    <section class="example-section">
+        <h2>3. User Role Union Type</h2>
+
+        <div class="example-card">
+            <h3>User Information</h3>
+            <div class="user-info">
+                <div class="user-detail">
+                    <strong>Name:</strong> {{ user.name }}
+                </div>
+                <div class="user-detail">
+                    <strong>ID:</strong> {{ user.id }}
+                </div>
+                <div class="user-detail">
+                    <strong>Role:</strong> {{ getRoleIcon(user.role) }} {{ user.role }}
+                </div>
+                <div class="user-detail">
+                    <strong>Permission Level:</strong> {{ getUserPermissionLevel() }}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Discriminated Union (API Responses) -->
+    <section class="example-section">
+        <h2>4. Discriminated Union Types</h2>
+
+        <div class="example-card">
+            <h3>API Response Examples</h3>
+            <div class="api-responses">
+                <div *ngFor="let response of apiResponses; index as i" class="response-item">
+                    <div class="response-header">
+                        <strong>Response {{ i + 1 }}:</strong>
+                        <span class="status-badge" [style.background-color]="getStatusColor(response.status)">
+                            {{ response.status }}
+                        </span>
+                    </div>
+                    <div class="response-content">
+                        <div *ngIf="response.status === 'loading'">
+                            <div class="progress">
+                                <div class="progress-bar" [style.width.%]="response.progress">
+                                    {{ response.progress }}%
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="response.status === 'success'">
+                            <div class="success-message">✅ {{ response.message }}</div>
+                            <pre class="data-preview">{{ response.data | json }}</pre>
+                        </div>
+                        <div *ngIf="response.status === 'error'">
+                            <div class="error-message">❌ Error {{ response.code }}: {{ response.error }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Status History -->
+    <section class="example-section">
+        <h2>5. Array of Union Types</h2>
+
+        <div class="example-card">
+            <h3>Status History</h3>
+            <div class="status-history">
+                <span *ngFor="let status of statusHistory; index as i" class="status-badge small"
+                    [style.background-color]="getStatusColor(status)">
+                    {{ i + 1 }}. {{ status }}
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Code Examples -->
+    <section class="example-section">
+        <h2>6. TypeScript Code Examples</h2>
+
+        <div class="example-card">
+            <h3>Union Type Definitions</h3>
+            <pre class="code-block"><code>// Basic union types
+type Status = 'loading' | 'success' | 'error' | 'idle';
+type Theme = 'light' | 'dark' | 'auto';
+type UserRole = 'admin' | 'user' | 'guest';
+
+// Union with different types
+type StringOrNumber = string | number;
+type ID = string | number;
+
+// Discriminated union
+type ApiResponse = 
+  | {{ '{' }} status: 'success'; data: any; message: string {{ '}' }}
+  | {{ '{' }} status: 'error'; error: string; code: number {{ '}' }}
+  | {{ '{' }} status: 'loading'; progress: number {{ '}' }};
+      </code></pre>
+        </div>
+
+        <div class="example-card">
+            <h3>Type Guard Example</h3>
+            <pre class="code-block"><code>// Type guard function
+isStringId(id: StringOrNumber): id is string {{ '{' }}
+  return typeof id === 'string';
+{{ '}' }}
+
+// Using type guards
+processId(id: StringOrNumber): string {{ '{' }}
+  if (this.isStringId(id)) {{ '{' }}
+    return id.toUpperCase(); // TypeScript knows id is string
+  {{ '}' }} else {{ '{' }}
+    return id.toString(); // TypeScript knows id is number
+  {{ '}' }}
+{{ '}' }}
+      </code></pre>
+        </div>
+    </section>
+</div>

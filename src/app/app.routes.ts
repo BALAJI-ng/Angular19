@@ -59,7 +59,17 @@ export const routes: Routes = [
             {
                 path: 'generics',
                 loadComponent: () => import('./generics/generics.component').then(m => m.GenericsComponent)
-            }
+            },
+            {
+                path: 'union-types',
+                loadComponent: () => import('./union-types/union-types.component').then(m => m.UnionTypesComponent)
+            },
+            {
+                path: 'constructor-syntax',
+                loadComponent: () => import('./constructor-syntax/constructor-syntax.component').then(m => m.ConstructorSyntaxComponent)
+            },
+            { path: 'ngrx-form', loadComponent: () => import('./ngrx-form/ngrx-form.component').then(m => m.NgrxFormComponent) }
+
         ]
     },
 ];

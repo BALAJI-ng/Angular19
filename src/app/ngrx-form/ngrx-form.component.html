@@ -1,0 +1,210 @@
+<div class="ngrx-form-container">
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1><i class="bi bi-diagram-3 text-primary"></i> NgRx Form Management</h1>
+        <p class="lead">Reactive form state management using NgRx Store</p>
+    </div>
+
+    <!-- Form Section -->
+    <div class="form-section">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="bi bi-person-fill"></i> User Form</h5>
+                    </div>
+                    <div class="card-body">
+                        <form class="user-form">
+                            <!-- Name Input -->
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Name</label>
+                                <input #name type="text" id="name" class="form-control" placeholder="Enter your name"
+                                    [value]="(name$ | async) || ''" (input)="onNameChange(name.value)" />
+                                <div class="form-text">Current name: {{ name$ | async }}</div>
+                            </div>
+
+                            <!-- Age Input -->
+                            <div class="mb-3">
+                                <label for="age" class="form-label">Age</label>
+                                <input type="number" id="age" class="form-control" placeholder="Enter your age" min="0"
+                                    max="120" #age [value]="(age$ | async) || 0" (input)="onAgeChange(+age.value)" />
+                                <div class="form-text">Current age: {{ age$ | async }} years</div>
+                            </div>
+
+                            <!-- Email Input -->
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input #email type="email" id="email" class="form-control"
+                                    placeholder="Enter your email" [value]="(email$ | async) || ''"
+                                    (input)="onEmailChange(email.value)" />
+                                <div class="form-text">Current email: {{ email$ | async }}</div>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="button-group">
+                                <button type="button" class="btn btn-primary me-2" (click)="onNameChange('John Doe')">
+                                    <i class="bi bi-person-plus"></i> Set Sample Name
+                                </button>
+                                <button type="button" class="btn btn-success me-2" (click)="onAgeChange(25)">
+                                    <i class="bi bi-calendar-plus"></i> Set Sample Age
+                                </button>
+                                <button type="button" class="btn btn-info me-2"
+                                    (click)="onEmailChange('john@example.com')">
+                                    <i class="bi bi-envelope-plus"></i> Set Sample Email
+                                </button>
+                                <button type="button" class="btn btn-warning" (click)="clearForm()">
+                                    <i class="bi bi-arrow-clockwise"></i> Clear Form
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="api-section mt-4">
+                <h6><i class="bi bi-cloud-upload"></i> API Submission</h6>
+                <div class="button-group">
+                    <button type="button" class="btn btn-primary me-2"
+                        [disabled]="!(isFormValid$ | async) || (loading$ | async)" (click)="submitForm()">
+                        <span *ngIf="loading$ | async" class="spinner-border spinner-border-sm me-2"></span>
+                        <i class="bi bi-cloud-upload"></i> Submit to Mock API
+                    </button>
+
+                    <button type="button" class="btn btn-success me-2"
+                        [disabled]="!(isFormValid$ | async) || (loading$ | async)" (click)="submitToRealAPI()">
+                        <i class="bi bi-globe"></i> Submit to Real API
+                    </button>
+
+                    <button type="button" class="btn btn-info me-2" (click)="logCurrentPayload()">
+                        <i class="bi bi-terminal"></i> Log Payload
+                    </button>
+
+                    <button type="button" class="btn btn-secondary" (click)="loadSampleUsers()">
+                        <i class="bi bi-people"></i> Load Sample Data
+                    </button>
+                </div>
+
+                <!-- Loading indicator -->
+                <div *ngIf="loading$ | async" class="loading-indicator mt-3">
+                    <div class="alert alert-info">
+                        <i class="bi bi-clock-history"></i> Submitting form data...
+                    </div>
+                </div>
+
+                <!-- Error display -->
+                <div *ngIf="error$ | async" class="error-display mt-3">
+                    <div class="alert alert-danger">
+                        <i class="bi bi-exclamation-triangle"></i> {{ error$ | async }}
+                    </div>
+                </div>
+
+                <!-- Success response -->
+                <div *ngIf="lastApiResponse$ | async" class="response-display mt-3">
+                    <div class="alert alert-success">
+                        <h6><i class="bi bi-check-circle"></i> API Response:</h6>
+                        <pre>{{ (lastApiResponse$ | async) | json }}</pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form State Display -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="bi bi-eye-fill"></i> Current Form State</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="state-display">
+                            <h6>Individual Observables:</h6>
+                            <div class="state-item">
+                                <strong>Name:</strong>
+                                <span class="badge bg-primary">{{ (name$ | async) ? (name$ | async) : 'Empty' }}</span>
+                            </div>
+                            <div class="state-item">
+                                <strong>Age:</strong>
+                                <span class="badge bg-success">{{ (age$ | async) ?(age$ | async) : 0 }}</span>
+                            </div>
+                            <div class="state-item">
+                                <strong>Email:</strong>
+                                <span class="badge bg-info">{{ (email$ | async)?(email$ | async) : 'Empty' }}</span>
+                            </div>
+
+                            <hr>
+
+                            <h6>Complete Form State:</h6>
+                            <div class="json-display">
+                                <pre>{{ (form$ | async) | json }}</pre>
+                            </div>
+
+                            <hr>
+
+                            <h6>Form Validation Status:</h6>
+                            <div class="validation-status">
+                                <div class="validation-item" [class.valid]="isNameValid$ | async"
+                                    [class.invalid]="!(isNameValid$ | async)">
+                                    <i class="bi" [class.bi-check-circle-fill]="isNameValid$ | async"
+                                        [class.bi-x-circle-fill]="!(isNameValid$ | async)"></i>
+                                    Name: {{ (isNameValid$ | async) ? 'Valid' : 'Invalid' }}
+                                </div>
+                                <div class="validation-item" [class.valid]="isAgeValid$ | async"
+                                    [class.invalid]="!(isAgeValid$ | async)">
+                                    <i class="bi" [class.bi-check-circle-fill]="isAgeValid$ | async"
+                                        [class.bi-x-circle-fill]="!(isAgeValid$ | async)"></i>
+                                    Age: {{ (isAgeValid$ | async) ? 'Valid' : 'Invalid' }}
+                                </div>
+                                <div class="validation-item" [class.valid]="isEmailValid$ | async"
+                                    [class.invalid]="!(isEmailValid$ | async)">
+                                    <i class="bi" [class.bi-check-circle-fill]="isEmailValid$ | async"
+                                        [class.bi-x-circle-fill]="!(isEmailValid$ | async)"></i>
+                                    Email: {{ (isEmailValid$ | async) ? 'Valid' : 'Invalid' }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NgRx Concepts Section -->
+    <div class="concepts-section mt-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="bi bi-lightbulb-fill"></i> NgRx Form Concepts</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h6><i class="bi bi-arrow-up-circle"></i> Actions</h6>
+                                <ul class="concept-list">
+                                    <li><code>onNameUpdate</code> - Updates name field</li>
+                                    <li><code>onEmailUpdate</code> - Updates email field</li>
+                                    <li><code>onAgeUpdate</code> - Updates age field</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-4">
+                                <h6><i class="bi bi-gear-fill"></i> Reducer</h6>
+                                <ul class="concept-list">
+                                    <li><code>formReducer</code> - Handles all form actions</li>
+                                    <li>Immutable state updates</li>
+                                    <li>Pure function transformations</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-4">
+                                <h6><i class="bi bi-funnel-fill"></i> Selectors</h6>
+                                <ul class="concept-list">
+                                    <li><code>selectName</code> - Gets name from state</li>
+                                    <li><code>selectEmail</code> - Gets email from state</li>
+                                    <li><code>selectAge</code> - Gets age from state</li>
+                                    <li><code>selectForm</code> - Gets entire form state</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,227 @@
+<div class="constructor-syntax-container">
+    <h1>TypeScript Constructor Syntax Examples</h1>
+
+    <button (click)="trigger()"></button>
+
+    <!-- Constructor Patterns Overview -->
+    <section class="overview-section">
+        <h2>Constructor Patterns</h2>
+        <div class="pattern-grid">
+            <div *ngFor="let example of constructorExamples" class="pattern-card">
+                <h3>{{ example.title }}</h3>
+                <p class="description">{{ example.description }}</p>
+                <pre class="code-block"><code>{{ example.code }}</code></pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Examples Section -->
+    <section class="examples-section">
+        <h2>Live Examples</h2>
+
+        <!-- Traditional Constructor -->
+        <div class="example-card">
+            <h3>1. Traditional Constructor</h3>
+            <div class="example-content">
+                <div class="info-display">
+                    <strong>Current Instance:</strong> {{ getPersonInfo(traditionalPerson) }}
+                </div>
+                <button (click)="createTraditionalPerson()" class="btn btn-primary">
+                    Create New Traditional Person
+                </button>
+            </div>
+        </div>
+
+        <!-- Parameter Properties -->
+        <div class="example-card">
+            <h3>2. Parameter Properties (Modern Syntax)</h3>
+            <div class="example-content">
+                <div class="info-display">
+                    <strong>Current Instance:</strong> {{ getPersonInfo(modernPerson) }}
+                    <br>
+                    <strong>ID:</strong> {{ modernPerson.getId() }}
+                </div>
+                <button (click)="createModernPerson()" class="btn btn-success">
+                    Create New Modern Person
+                </button>
+            </div>
+        </div>
+
+        <!-- Optional Parameters -->
+        <div class="example-card">
+            <h3>3. Optional Parameters</h3>
+            <div class="example-content">
+                <div class="info-display">
+                    <strong>Full Info:</strong> {{ getPersonFullInfo(personWithOptionals) }}
+                </div>
+                <div class="feature-highlight">
+                    ✨ This constructor uses default values and optional parameters
+                </div>
+            </div>
+        </div>
+
+        <!-- Constructor Overloading -->
+        <div class="example-card">
+            <h3>4. Constructor Overloading</h3>
+            <div class="example-content">
+                <div class="info-display">
+                    <strong>Contact Info:</strong>
+                    <div class="contact-details">
+                        <div>📧 {{ flexiblePerson.getContactInfo().email }}</div>
+                        <div>📞 {{ flexiblePerson.getContactInfo().phone }}</div>
+                    </div>
+                </div>
+                <div class="feature-highlight">
+                    🔄 Multiple constructor signatures for flexibility
+                </div>
+            </div>
+        </div>
+
+        <!-- Dependency Injection -->
+        <div class="example-card">
+            <h3>5. Dependency Injection Pattern</h3>
+            <div class="example-content">
+                <div class="info-display">
+                    <strong>Controller Execution:</strong> {{ controller.execute() }}
+                </div>
+                <div class="feature-highlight">
+                    🔌 Constructor receives dependencies from outside
+                </div>
+            </div>
+        </div>
+
+        <!-- Generic Constructor -->
+        <div class="example-card">
+            <h3>6. Generic Constructor</h3>
+            <div class="example-content">
+                <div class="info-display">
+                    <strong>Repository:</strong> {{ getRepositoryInfo().name }}
+                    <br>
+                    <strong>Items Count:</strong> {{ getRepositoryInfo().count }}
+                    <br>
+                    <strong>Items:</strong>
+                    <div class="items-list">
+                        <span *ngFor="let item of getRepositoryInfo().items" class="item-badge">
+                            {{ item }}
+                        </span>
+                    </div>
+                </div>
+                <button (click)="addUserToRepository()" class="btn btn-info">
+                    Add New User
+                </button>
+            </div>
+        </div>
+
+        <!-- Inheritance -->
+        <div class="example-card">
+            <h3>7. Constructor with Inheritance</h3>
+            <div class="example-content">
+                <div class="info-display">
+                    <strong>Vehicle Info:</strong> {{ car.getInfo() }}
+                </div>
+                <button (click)="createNewCar()" class="btn btn-warning">
+                    Create Random Car
+                </button>
+                <div class="feature-highlight">
+                    🏗️ Child class calls parent constructor with super()
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Best Practices Section -->
+    <section class="best-practices-section">
+        <h2>Constructor Best Practices</h2>
+
+        <div class="practice-grid">
+            <div class="practice-card">
+                <h4>🎯 Use Parameter Properties</h4>
+                <p>Prefer parameter properties for cleaner, more concise code</p>
+                <pre class="mini-code"><code>constructor(private name: string) {{ '{' }}{{ '}' }}</code></pre>
+            </div>
+
+            <div class="practice-card">
+                <h4>🔧 Minimal Logic</h4>
+                <p>Keep constructor logic simple, delegate complex operations</p>
+                <pre class="mini-code"><code>constructor() {{ '{' }}
+  this.initializeData();
+{{ '}' }}</code></pre>
+            </div>
+
+            <div class="practice-card">
+                <h4>📝 Optional Parameters Last</h4>
+                <p>Place optional parameters after required ones</p>
+                <pre class="mini-code"><code>constructor(
+  required: string,
+  optional?: number
+) {{ '{' }}{{ '}' }}</code></pre>
+            </div>
+
+            <div class="practice-card">
+                <h4>🔒 Access Modifiers</h4>
+                <p>Use appropriate access modifiers for encapsulation</p>
+                <pre class="mini-code"><code>constructor(
+  private secret: string,
+  public name: string,
+  protected id: string
+) {{ '{' }}{{ '}' }}</code></pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Table -->
+    <section class="comparison-section">
+        <h2>Constructor Syntax Comparison</h2>
+
+        <div class="comparison-table">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Pattern</th>
+                        <th>Pros</th>
+                        <th>Cons</th>
+                        <th>Use Case</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Traditional</strong></td>
+                        <td>Explicit, clear property assignments</td>
+                        <td>Verbose, repetitive code</td>
+                        <td>Complex initialization logic</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Parameter Properties</strong></td>
+                        <td>Concise, automatic property creation</td>
+                        <td>Less explicit about property declarations</td>
+                        <td>Simple data classes, DTOs</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Optional Parameters</strong></td>
+                        <td>Flexible, default values</td>
+                        <td>Can lead to many overloads</td>
+                        <td>Configuration objects</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Overloading</strong></td>
+                        <td>Type-safe multiple signatures</td>
+                        <td>Complex implementation</td>
+                        <td>APIs with multiple input formats</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Dependency Injection</strong></td>
+                        <td>Testable, decoupled design</td>
+                        <td>Requires DI container setup</td>
+                        <td>Services, controllers</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Generic</strong></td>
+                        <td>Type-safe, reusable</td>
+                        <td>More complex type constraints</td>
+                        <td>Collections, repositories</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>

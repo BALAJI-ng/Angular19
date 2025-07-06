@@ -96,4 +96,20 @@ export class LayoutComponent {
     this.router.navigate(['/dashboard/generics']);
     this.setActiveLink('Generics');
   }
+
+  navigateToUnionTypes() {
+    this.router.navigate(['/dashboard/union-types']);
+    this.setActiveLink('UnionTypes');
+  }
+
+  navigateToConstructorSyntax() {
+    this.router.navigate(['/dashboard/constructor-syntax']);
+    this.setActiveLink('ConstructorSyntax');
+  }
+
+  navigateToNgrxForm() {
+    this.activeLink = 'ngrx-form';
+    this.router.navigate(['/dashboard/ngrx-form']);
+  }
+
 }

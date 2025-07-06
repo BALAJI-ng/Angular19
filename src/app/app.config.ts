@@ -5,6 +5,7 @@ import { counterReducer } from './state-managment/ngrx/store';
 import { userReducer } from './state-managment/ngrx/user.reducer';
 
 import { routes } from './app.routes';
+import { formReducer } from './ngrx-form/store';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -12,7 +13,8 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideStore({
       counter: counterReducer,
-      user: userReducer
+      user: userReducer,
+      userForm: formReducer
     })
   ]
 };
