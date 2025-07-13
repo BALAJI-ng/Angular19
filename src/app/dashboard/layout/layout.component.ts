@@ -2,20 +2,17 @@ import { Component } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
-
 @Component({
   selector: 'app-layout',
-  imports: [CommonModule, RouterOutlet,],
+  imports: [CommonModule, RouterOutlet],
   templateUrl: './layout.component.html',
-  styleUrl: './layout.component.scss'
+  styleUrl: './layout.component.scss',
 })
 export class LayoutComponent {
-
-
-
   activeLink: string = 'Home';
+  sidebarOpen = false;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
   setActiveLink(linkName: string): void {
     this.activeLink = linkName;
@@ -32,6 +29,15 @@ export class LayoutComponent {
   navigateToHome(): void {
     this.router.navigate(['/dashboard/home']);
     this.setActiveLink('Home');
+  }
+
+  navigateToGridFlex(): void {
+    this.router.navigate(['/dashboard/grid-flex']);
+    this.setActiveLink('grid-flex');
+  }
+  navigateToGridFlexTryout(): void {
+    this.router.navigate(['/dashboard/app-flex-layout-try']);
+    this.setActiveLink('app-flex-layout-try');
   }
 
   navigateToSeniorAngular() {
@@ -127,5 +133,12 @@ export class LayoutComponent {
     this.setActiveLink('NgrxFacadeAdaptor');
   }
 
+  navigateToJestValidation() {
+    this.router.navigate(['/dashboard/jest-validation']);
+    this.setActiveLink('JestValidation');
+  }
 
+  isMobile(): boolean {
+    return window.innerWidth < 768;
+  }
 }

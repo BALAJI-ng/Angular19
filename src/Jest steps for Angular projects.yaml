@@ -1,0 +1,6 @@
+Jest steps for Angular projects
+# This YAML snippet outlines the steps to set up Jest in an Angular project.
+npm install --save-dev jest jest-preset-angular ts-jest @types/jest
+
+# Configure jest.config.js file at root of the project
+jest.config.js

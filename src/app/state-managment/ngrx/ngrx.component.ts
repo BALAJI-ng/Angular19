@@ -1,18 +1,30 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { increment, decrement, reset, selectCounterValue, AppState } from './store';
+import {
+  increment,
+  decrement,
+  reset,
+  selectCounterValue,
+  AppState,
+} from './store';
 import { User, CreateUserRequest, UpdateUserRequest } from './user.model';
 import * as UserActions from './user.actions';
 import * as UserSelectors from './user.selectors';
+import { ChildComponent } from '../../event-bus/child/child.component'; // Adjust the import path as necessary
 
 @Component({
   selector: 'app-ngrx',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, ChildComponent],
   templateUrl: './ngrx.component.html',
-  styleUrl: './ngrx.component.scss'
+  styleUrl: './ngrx.component.scss',
 })
 export class NgrxComponent implements OnInit {
   counter$: Observable<number>;
@@ -25,10 +37,7 @@ export class NgrxComponent implements OnInit {
   loading$: Observable<boolean>;
   error$: Observable<string | null>;
 
-  constructor(
-    private store: Store<AppState>,
-    private fb: FormBuilder
-  ) {
+  constructor(private store: Store<AppState>, private fb: FormBuilder) {
     // Counter observable
     this.counter$ = this.store.select(selectCounterValue);
 
@@ -42,9 +51,12 @@ export class NgrxComponent implements OnInit {
     this.userForm = this.fb.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
-      mobile: ['', [Validators.required, Validators.pattern(/^[\+]?[0-9\s\-\(\)]+$/)]],
+      mobile: [
+        '',
+        [Validators.required, Validators.pattern(/^[\+]?[0-9\s\-\(\)]+$/)],
+      ],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
   ngOnInit(): void {
@@ -52,14 +64,14 @@ export class NgrxComponent implements OnInit {
     this.addSampleUsers();
 
     // Subscribe to selected user for editing
-    this.selectedUser$.subscribe(user => {
+    this.selectedUser$.subscribe((user) => {
       if (user) {
         this.userForm.patchValue({
           firstName: user.firstName,
           lastName: user.lastName,
           mobile: user.mobile,
           email: user.email,
-          password: '' // Don't populate password for security
+          password: '', // Don't populate password for security
         });
       }
     });
@@ -73,18 +85,18 @@ export class NgrxComponent implements OnInit {
         lastName: 'Doe',
         mobile: '+1234567890',
         email: 'john.doe@example.com',
-        password: 'password123'
+        password: 'password123',
       },
       {
         firstName: 'Jane',
         lastName: 'Smith',
         mobile: '+1987654321',
         email: 'jane.smith@example.com',
-        password: 'password123'
-      }
+        password: 'password123',
+      },
     ];
 
-    sampleUsers.forEach(user => {
+    sampleUsers.forEach((user) => {
       this.store.dispatch(UserActions.createUser({ user }));
     });
   }
@@ -107,39 +119,44 @@ export class NgrxComponent implements OnInit {
       this.isLoading = true; // Start loading
       const formValue = this.userForm.value;
 
-      this.selectedUser$.subscribe(selectedUser => {
-        if (selectedUser) {
-          // Update existing user
-          const updateRequest: UpdateUserRequest = {
-            id: selectedUser.id,
-            firstName: formValue.firstName,
-            lastName: formValue.lastName,
-            mobile: formValue.mobile,
-            email: formValue.email
-          };
-          this.store.dispatch(UserActions.updateUser({ user: updateRequest }));
-        } else {
-          // Create new user
-          const createRequest: CreateUserRequest = {
-            firstName: formValue.firstName,
-            lastName: formValue.lastName,
-            mobile: formValue.mobile,
-            email: formValue.email,
-            password: formValue.password
-          };
-          this.store.dispatch(UserActions.createUser({ user: createRequest }));
-        }
+      this.selectedUser$
+        .subscribe((selectedUser) => {
+          if (selectedUser) {
+            // Update existing user
+            const updateRequest: UpdateUserRequest = {
+              id: selectedUser.id,
+              firstName: formValue.firstName,
+              lastName: formValue.lastName,
+              mobile: formValue.mobile,
+              email: formValue.email,
+            };
+            this.store.dispatch(
+              UserActions.updateUser({ user: updateRequest })
+            );
+          } else {
+            // Create new user
+            const createRequest: CreateUserRequest = {
+              firstName: formValue.firstName,
+              lastName: formValue.lastName,
+              mobile: formValue.mobile,
+              email: formValue.email,
+              password: formValue.password,
+            };
+            this.store.dispatch(
+              UserActions.createUser({ user: createRequest })
+            );
+          }
 
-        // Simulate API call delay and reset loading
-        setTimeout(() => {
-          this.isLoading = false;
-          this.resetForm();
-        }, 1000);
-
-      }).unsubscribe();
+          // Simulate API call delay and reset loading
+          setTimeout(() => {
+            this.isLoading = false;
+            this.resetForm();
+          }, 1000);
+        })
+        .unsubscribe();
     } else {
       // Mark all fields as touched to show validation errors
-      Object.keys(this.userForm.controls).forEach(key => {
+      Object.keys(this.userForm.controls).forEach((key) => {
         this.userForm.get(key)?.markAsTouched();
       });
     }

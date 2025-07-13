@@ -1,0 +1,52 @@
+<!-- Normal Subject Section -->
+<div class="mb-4">
+  <h5 class="mb-3">Normal Subject</h5>
+  <div class="mb-3">
+    <input
+      type="text"
+      placeholder="Enter text here"
+      [(ngModel)]="inputText"
+      class="form-control"
+    />
+  </div>
+  <button class="btn btn-primary" (click)="sendData()">
+    Send Normal Subject Data
+  </button>
+</div>
+
+<!-- Behaviour Subject Section -->
+<div class="mb-4">
+  <h5 class="mb-3">Behaviour Subject</h5>
+  <div class="mb-3">
+    <input
+      type="text"
+      class="form-control"
+      [(ngModel)]="behaviourSubjectInput"
+    />
+  </div>
+  <button class="btn btn-primary" (click)="sendBehaviourData()">
+    Send Behaviour Data
+  </button>
+</div>
+
+<!-- Replay Subject Section -->
+<div class="mb-4">
+  <h5 class="mb-3">Replay Subject</h5>
+  <div class="mb-3">
+    <input type="text" class="form-control" [(ngModel)]="replaySubjectInput" />
+  </div>
+  <button class="btn btn-primary" (click)="sendReplayData()">
+    Send Replay Data
+  </button>
+</div>
+
+<!-- Aync Subject Section -->
+<div class="mb-4">
+  <h5 class="mb-3">Async Subject</h5>
+  <div class="mb-3">
+    <input type="text" class="form-control" [(ngModel)]="asyncSubjectInput" />
+  </div>
+  <button class="btn btn-primary" (click)="sendAsyncData()">
+    Send Async Data
+  </button>
+</div>

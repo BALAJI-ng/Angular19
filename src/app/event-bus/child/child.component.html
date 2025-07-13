@@ -1,0 +1,12 @@
+<div class="child-component">
+  <h3>Child Component</h3>
+  <p><strong>Message:</strong> {{ displayMessage }}</p>
+  
+  @if (userInfo) {
+    <div class="user-info">
+      <h4>User Details:</h4>
+      <p><strong>ID:</strong> {{ userInfo.id }}</p>
+      <p><strong>Name:</strong> {{ userInfo.name }}</p>
+    </div>
+  }
+</div>

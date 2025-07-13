@@ -1,0 +1,102 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="mb-0">
+            <i class="bi bi-check-circle text-primary me-2"></i>
+            Jest Form Validation Demo
+          </h4>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+            <!-- Name Field -->
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input
+                type="text"
+                id="name"
+                class="form-control"
+                formControlName="name"
+                [class.is-invalid]="name?.invalid && name?.touched"
+                [class.is-valid]="name?.valid && name?.touched"
+              />
+              <div
+                *ngIf="name?.invalid && name?.touched"
+                class="invalid-feedback"
+              >
+                <div *ngIf="name?.errors?.['required']">Name is required</div>
+              </div>
+            </div>
+
+            <!-- Email Field -->
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input
+                type="email"
+                id="email"
+                class="form-control"
+                formControlName="email"
+                [class.is-invalid]="email?.invalid && email?.touched"
+                [class.is-valid]="email?.valid && email?.touched"
+              />
+              <div
+                *ngIf="email?.invalid && email?.touched"
+                class="invalid-feedback"
+              >
+                <div *ngIf="email?.errors?.['required']">Email is required</div>
+                <div *ngIf="email?.errors?.['email']">Invalid email format</div>
+              </div>
+            </div>
+
+            <!-- Age Field -->
+            <div class="mb-3">
+              <label for="age" class="form-label">Age</label>
+              <input
+                type="number"
+                id="age"
+                class="form-control"
+                formControlName="age"
+                [class.is-invalid]="age?.invalid && age?.touched"
+                [class.is-valid]="age?.valid && age?.touched"
+              />
+              <div
+                *ngIf="age?.invalid && age?.touched"
+                class="invalid-feedback"
+              >
+                <div *ngIf="age?.errors?.['required']">Age is required</div>
+                <div *ngIf="age?.errors?.['min']">
+                  Age must be greater than 0
+                </div>
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="d-grid">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                [disabled]="userForm.invalid"
+              >
+                <i class="bi bi-check-lg me-2"></i>
+                Submit Form
+              </button>
+            </div>
+          </form>
+
+          <!-- Form Status Display -->
+          <div class="mt-4">
+            <div class="alert alert-info" *ngIf="userForm.valid">
+              <i class="bi bi-check-circle-fill me-2"></i>
+              Form is valid and ready to submit!
+            </div>
+            <div class="alert alert-warning" *ngIf="userForm.invalid">
+              <i class="bi bi-exclamation-triangle-fill me-2"></i>
+              Please fix the validation errors above.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

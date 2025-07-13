@@ -1,0 +1,40 @@
+.parent-component {
+  padding: 20px;
+  border: 2px solid #28a745;
+  border-radius: 8px;
+  margin: 10px;
+  background-color: #f8fff9;
+  
+  h2 {
+    color: #28a745;
+    margin-top: 0;
+  }
+  
+  p {
+    color: #495057;
+    margin-bottom: 20px;
+  }
+  
+  .emitted-data {
+    background-color: #e8f5e8;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    border-left: 4px solid #28a745;
+    
+    h4 {
+      color: #155724;
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+    
+    pre {
+      background-color: #d4edda;
+      padding: 10px;
+      border-radius: 4px;
+      margin: 0;
+      color: #155724;
+      font-family: 'Courier New', monospace;
+    }
+  }
+}

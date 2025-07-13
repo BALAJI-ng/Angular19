@@ -1,4 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideMockStore } from '@ngrx/store/testing';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 import { NgrxFormComponent } from './ngrx-form.component';
 
@@ -8,9 +11,13 @@ describe('NgrxFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NgrxFormComponent]
-    })
-    .compileComponents();
+      imports: [NgrxFormComponent],
+      providers: [
+        provideMockStore({}),
+        provideHttpClient(),
+        provideHttpClientTesting(),
+      ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(NgrxFormComponent);
     component = fixture.componentInstance;

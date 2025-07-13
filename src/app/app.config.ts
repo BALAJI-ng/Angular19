@@ -14,6 +14,7 @@ import { UserEffects } from './json-server-ngrx-adaptor-facade/user.effects';
 
 import { routes } from './app.routes';
 import { formReducer } from './ngrx-form/store';
+import { myCapgeminiReducer } from './reduc-capgemini/store';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -27,8 +28,9 @@ export const appConfig: ApplicationConfig = {
       userStore: userStoreReducer,
       simpleReducer: simpleUserReducer,
       anyName: myreducer_facade_adapter,
-      jsonUsers: myJsonReducer
+      jsonUsers: myJsonReducer,
+      myCapgeminiReducer: myCapgeminiReducer,
     }),
-    provideEffects([UserEffects])
-  ]
+    provideEffects([UserEffects]),
+  ],
 };

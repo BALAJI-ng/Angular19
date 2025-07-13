@@ -1,0 +1,81 @@
+<!-- Normal Subject Section -->
+<div class="card mb-4">
+  <div class="card-header bg-primary text-white">
+    <h5 class="mb-0">Normal Subject</h5>
+  </div>
+  <div class="card-body">
+    <div class="alert alert-info" *ngIf="data$ | async as data; else noData">
+      <strong>Data:</strong> {{ data }}
+    </div>
+    <ng-template #noData>
+      <div class="text-muted">No data available</div>
+    </ng-template>
+  </div>
+</div>
+
+<!-- Behaviour Subject Section -->
+<div class="card mb-4">
+  <div class="card-header bg-success text-white">
+    <h5 class="mb-0">Behaviour Subject</h5>
+  </div>
+  <div class="card-body">
+    <div class="alert alert-success" *ngIf="dataBehaviourSubjectArray && dataBehaviourSubjectArray.length > 0; else noBehaviourData">
+      <strong>Data Array:</strong>
+      <ul class="mb-0 mt-2">
+        <li *ngFor="let item of dataBehaviourSubjectArray">
+          {{ item }}
+        </li>
+      </ul>
+    </div>
+    <ng-template #noBehaviourData>
+      <div class="text-muted">No behaviour subject data available</div>
+    </ng-template>
+  </div>
+</div>
+
+<!-- Behaviour Subject Section -->
+<div class="card mb-4">
+  <div class="card-header bg-success text-white">
+    <h5 class="mb-0">Replay Subject</h5>
+  </div>
+  <div class="card-body">
+    <div class="alert alert-success" *ngIf="dataReplaySubjectArray && dataReplaySubjectArray.length > 0; else noReplayData">
+      <strong>Data Array:</strong>
+      <ul class="mb-0 mt-2">
+        <li *ngFor="let item of dataReplaySubjectArray">
+          {{ item }}
+        </li>
+      </ul>
+    </div>
+    <ng-template #noReplayData>
+      <div class="text-muted">No Replay subject data available</div>
+    </ng-template>
+  </div>
+</div>
+
+<!-- Async Subject Section -->
+<div class="card mb-4">
+  <div class="card-header bg-warning text-dark">
+    <h5 class="mb-0">Async Subject</h5>
+    <small class="text-muted">⚠️ Only emits the last value when completed</small>
+  </div>
+  <div class="card-body">
+    <div class="alert alert-warning mb-3">
+      <strong>🔄 Array Length:</strong> {{ dataAsyncSubject.length }}
+    </div>
+    <div class="alert alert-success" *ngIf="dataAsyncSubject && dataAsyncSubject.length > 0; else noAsyncData">
+      <strong>Data Array:</strong>
+      <ul class="mb-0 mt-2">
+        <li *ngFor="let item of dataAsyncSubject; let i = index">
+          <strong>{{ i + 1 }}:</strong> {{ item }}
+        </li>
+      </ul>
+    </div>
+    <ng-template #noAsyncData>
+      <div class="text-muted">
+        <p>No Async subject data available</p>
+        <small>AsyncSubject only emits when <code>.complete()</code> is called</small>
+      </div>
+    </ng-template>
+  </div>
+</div>

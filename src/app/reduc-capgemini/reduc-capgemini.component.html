@@ -1,0 +1,18 @@
+<section>
+  <form [formGroup]="todoForm" (ngSubmit)="submit()">
+    <input type="text" formControlName="taskName" />
+    <button type="submit">Add</button>
+  </form>
+</section>
+
+<section>
+  <ng-container *ngIf="displayHtml$">
+    <div *ngFor="let task of displayHtml$ | async as users; let i = index">
+      <span>{{ task.id }}</span>
+      <span>{{ task.name }}</span>
+      <span>{{ task.isCompleted }}</span>
+      <button (click)="completedTask(task.id)">Update</button>
+      <button (click)="deleteTask(task.id)">Delete</button>
+    </div>
+  </ng-container>
+</section>

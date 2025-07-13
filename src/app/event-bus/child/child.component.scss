@@ -1,0 +1,33 @@
+.child-component {
+  padding: 20px;
+  border: 2px solid #007bff;
+  border-radius: 8px;
+  margin: 10px;
+  background-color: #f8f9fa;
+  
+  h3 {
+    color: #007bff;
+    margin-top: 0;
+  }
+  
+  .user-info {
+    background-color: #e7f3ff;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 15px;
+    border-left: 4px solid #007bff;
+    
+    h4 {
+      color: #0056b3;
+      margin-top: 0;
+    }
+    
+    p {
+      margin: 5px 0;
+      
+      strong {
+        color: #495057;
+      }
+    }
+  }
+}

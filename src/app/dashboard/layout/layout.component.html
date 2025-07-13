@@ -1,246 +1,396 @@
 <!-- Top Navigation Bar -->
 <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">AdviKart</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" [class.active]="isActive('Home')" (click)="navigateToHome()"
-                        style="cursor: pointer;">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" [class.active]="isActive('About')" href="#"
-                        (click)="setActiveLink('About')">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" [class.active]="isActive('Services')" href="#"
-                        (click)="setActiveLink('Services')">Services</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" [class.active]="isActive('Contact')" href="#"
-                        (click)="setActiveLink('Contact')">Contact</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Sign Up</a>
-                </li>
-            </ul>
-        </div>
+  <div class="container-fluid">
+    <button
+      class="btn btn-outline-light me-2 d-md-none"
+      type="button"
+      (click)="sidebarOpen = !sidebarOpen"
+      aria-label="Toggle sidebar"
+    >
+      <i class="bi bi-list"></i>
+    </button>
+    <a class="navbar-brand" href="#">AdviKart</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [class.active]="isActive('Home')"
+            (click)="navigateToHome()"
+            style="cursor: pointer"
+            >Home</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [class.active]="isActive('About')"
+            href="#"
+            (click)="setActiveLink('About')"
+            >About</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [class.active]="isActive('Services')"
+            href="#"
+            (click)="setActiveLink('Services')"
+            >Services</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [class.active]="isActive('Contact')"
+            href="#"
+            (click)="setActiveLink('Contact')"
+            >Contact</a
+          >
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Sign Up</a>
+        </li>
+      </ul>
     </div>
+  </div>
 </nav>
 
 <!-- Sidebar and Main Content -->
 <div class="container-fluid">
-    <div class="row">
-        <!-- Sidebar -->
-        <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-            <div class="position-sticky pt-3">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link" [class.active]="isActive('Dashboard')" (click)="navigateToHome()"
-                            style="cursor: pointer;">
-                            <i class="bi bi-house"></i>
-                            Dashboard
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" [class.active]="isActive('NgRx')" (click)="navigateToNgrx()"
-                            style="cursor: pointer;">
-                            <i class="bi bi-gear"></i>
-                            NgRx Store
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" [class.active]="isActive('LazyLoading')" (click)="navigateToLazyLoading()"
-                            style="cursor: pointer;">
-                            <i class="bi bi-gear"></i>
-                            Lazy Loading
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" [class.active]="isActive('DependencyInjection')"
-                            (click)="navigateToDependencyInjection()" style="cursor: pointer;">
-                            <i class="bi bi-gear"></i>
-                            Dependency Injection
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" [class.active]="isActive('ContentProjection')"
-                            (click)="navigateToContentProjection()" style="cursor: pointer;">
-                            <i class="bi bi-gear"></i>
-                            Content Projection
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" [class.active]="isActive('NgContainerTemplate')"
-                            (click)="navigateToNgContainerTemplate()" style="cursor: pointer;">
-                            <i class="bi bi-gear"></i>
-                            ng-container & ng-template
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" [class.active]="isActive('ParentChildDemo')"
-                            (click)="navigateToParentChildDemo()" style="cursor: pointer;">
-                            <i class="bi bi-diagram-3"></i>
-                            ViewChild vs ContentChild
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" [class.active]="isActive('Signals')" (click)="navigateToSignals()"
-                            style="cursor: pointer;">
-                            <i class="bi bi-lightning"></i>
-                            Angular Signals
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" [class.active]="isActive('CircularDependency')"
-                            (click)="navigateToCircularDependency()" style="cursor: pointer;">
-                            <i class="bi bi-arrow-repeat text-danger"></i>
-                            Circular Dependency
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" [class.active]="isActive('Examples')" (click)="navigateToExamples()"
-                            style="cursor: pointer;">
-                            <i class="bi bi-code-square text-success"></i>
-                            Interactive Examples
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" [class.active]="isActive('SpreadOperator')"
-                            (click)="navigateToSpreadOperator()" style="cursor: pointer;">
-                            <i class="bi bi-three-dots text-warning"></i>
-                            Spread Operator
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" [class.active]="isActive('Interface')" (click)="navigateToInterface()"
-                            style="cursor: pointer;">
-                            <i class="bi bi-diagram-2 text-info"></i>
-                            TypeScript Interfaces
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" [class.active]="isActive('CreatingTypes')"
-                            (click)="navigateToCreatingTypes()" style="cursor: pointer;">
-                            <i class="bi bi-diagram-3 text-purple"></i>
-                            Creating Types from Types
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" [class.active]="isActive('Generics')" (click)="navigateToGenerics()"
-                            style="cursor: pointer;">
-                            <i class="bi bi-code-square text-success"></i>
-                            TypeScript Generics
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" [class.active]="isActive('Playwright')" (click)="navigateToPlaywright()"
-                            style="cursor: pointer;">
-                            <i class="bi bi-play-circle text-primary"></i>
-                            Playwright E2E Testing
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" [class.active]="isActive('AlertDemo')" (click)="navigateToAlertDemo()"
-                            style="cursor: pointer;">
-                            <i class="bi bi-exclamation-triangle text-warning"></i>
-                            Alert Service Demo
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" [class.active]="isActive('UnionTypes')" (click)="navigateToUnionTypes()"
-                            style="cursor: pointer;">
-                            <i class="bi bi-union text-primary"></i>
-                            TypeScript Union Types
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" [class.active]="isActive('ConstructorSyntax')"
-                            (click)="navigateToConstructorSyntax()" style="cursor: pointer;">
-                            <i class="bi bi-building text-warning"></i>
-                            Constructor Syntax
-                        </a>
-                    </li>
-                    <!-- Add this in the navigation menu section -->
-                    <li class="nav-item">
+  <div class="row">
+    <!-- Sidebarsdfsdfsdf -->
+    <nav
+      id="sidebar"
+      class="col-md-3 col-lg-2 d-md-block bg-light sidebar sidebar-scroll"
+      [ngClass]="{
+        'd-none': !sidebarOpen && isMobile(),
+        collapse: !sidebarOpen && !isMobile()
+      }"
+      style="max-height: 100vh; overflow-y: auto"
+    >
+      <div class="position-sticky pt-3">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [class.active]="isActive('Dashboard')"
+              (click)="navigateToHome()"
+              style="cursor: pointer"
+            >
+              <i class="bi bi-house"></i>
+              Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [class.active]="isActive('grid-flex')"
+              (click)="navigateToGridFlex()"
+              style="cursor: pointer"
+            >
+              <i class="bi bi-house"></i>
+              Grid & Flex Layout
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [class.active]="isActive('grid-flex-try')"
+              (click)="navigateToGridFlexTryout()"
+              style="cursor: pointer"
+            >
+              <i class="bi bi-house"></i>
+              Grid & Flex Layout-2
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [class.active]="isActive('NgRx')"
+              (click)="navigateToNgrx()"
+              style="cursor: pointer"
+            >
+              <i class="bi bi-gear"></i>
+              NgRx Store
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [class.active]="isActive('LazyLoading')"
+              (click)="navigateToLazyLoading()"
+              style="cursor: pointer"
+            >
+              <i class="bi bi-gear"></i>
+              Lazy Loading
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [class.active]="isActive('DependencyInjection')"
+              (click)="navigateToDependencyInjection()"
+              style="cursor: pointer"
+            >
+              <i class="bi bi-gear"></i>
+              Dependency Injection
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [class.active]="isActive('ContentProjection')"
+              (click)="navigateToContentProjection()"
+              style="cursor: pointer"
+            >
+              <i class="bi bi-gear"></i>
+              Content Projection
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [class.active]="isActive('NgContainerTemplate')"
+              (click)="navigateToNgContainerTemplate()"
+              style="cursor: pointer"
+            >
+              <i class="bi bi-gear"></i>
+              ng-container & ng-template
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [class.active]="isActive('ParentChildDemo')"
+              (click)="navigateToParentChildDemo()"
+              style="cursor: pointer"
+            >
+              <i class="bi bi-diagram-3"></i>
+              ViewChild vs ContentChild
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [class.active]="isActive('Signals')"
+              (click)="navigateToSignals()"
+              style="cursor: pointer"
+            >
+              <i class="bi bi-lightning"></i>
+              Angular Signals
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [class.active]="isActive('CircularDependency')"
+              (click)="navigateToCircularDependency()"
+              style="cursor: pointer"
+            >
+              <i class="bi bi-arrow-repeat text-danger"></i>
+              Circular Dependency
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [class.active]="isActive('Examples')"
+              (click)="navigateToExamples()"
+              style="cursor: pointer"
+            >
+              <i class="bi bi-code-square text-success"></i>
+              Interactive Examples
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [class.active]="isActive('SpreadOperator')"
+              (click)="navigateToSpreadOperator()"
+              style="cursor: pointer"
+            >
+              <i class="bi bi-three-dots text-warning"></i>
+              Spread Operator
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [class.active]="isActive('Interface')"
+              (click)="navigateToInterface()"
+              style="cursor: pointer"
+            >
+              <i class="bi bi-diagram-2 text-info"></i>
+              TypeScript Interfaces
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [class.active]="isActive('CreatingTypes')"
+              (click)="navigateToCreatingTypes()"
+              style="cursor: pointer"
+            >
+              <i class="bi bi-diagram-3 text-purple"></i>
+              Creating Types from Types
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [class.active]="isActive('Generics')"
+              (click)="navigateToGenerics()"
+              style="cursor: pointer"
+            >
+              <i class="bi bi-code-square text-success"></i>
+              TypeScript Generics
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [class.active]="isActive('Playwright')"
+              (click)="navigateToPlaywright()"
+              style="cursor: pointer"
+            >
+              <i class="bi bi-play-circle text-primary"></i>
+              Playwright E2E Testing
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [class.active]="isActive('AlertDemo')"
+              (click)="navigateToAlertDemo()"
+              style="cursor: pointer"
+            >
+              <i class="bi bi-exclamation-triangle text-warning"></i>
+              Alert Service Demo
+            </a>
+          </li>
+
+          <!-- Add this in the navigation menu section -->
+          <!-- <li class="nav-item">
                         <a class="nav-link" [class.active]="activeLink === 'ngrx-form'" (click)="navigateToNgrxForm()"
                             href="javascript:void(0)">
                             <i class="bi bi-diagram-3 text-success"></i>
                             <span>NgRx Form</span>
                         </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" [class.active]="isActive('SeniorAngular')"
-                            (click)="navigateToSeniorAngular()" style="cursor: pointer;">
-                            <i class="bi bi-gear"></i>
-                            Component Architecture
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" [class.active]="isActive('ErrorTest')" (click)="navigateToErrorTest()"
-                            style="cursor: pointer;">
-                            <i class="bi bi-bug text-danger"></i>
-                            Error Interceptor Test
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" [class.active]="isActive('ReduxStore')" (click)="navigateToReduxStore()"
-                            style="cursor: pointer;">
-                            <i class="bi bi-database text-info"></i>
-                            Redux User Store
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" [class.active]="isActive('SimpleUserNgrx')"
-                            (click)="navigateToSimpleUserNgrx()" style="cursor: pointer;">
-                            <i class="bi bi-person-plus text-success"></i>
-                            Simple User NgRx
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" [class.active]="isActive('NgrxFacadeAdaptor')"
-                            (click)="navigateToNgrxFacadeAdaptor()" style="cursor: pointer;">
-                            <i class="bi bi-person-plus text-success"></i>
-                            Ngrx Facade Adaptor
-                        </a>
-                    </li>
+                    </li> -->
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [class.active]="isActive('SeniorAngular')"
+              (click)="navigateToSeniorAngular()"
+              style="cursor: pointer"
+            >
+              <i class="bi bi-gear"></i>
+              Component Architecture
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [class.active]="isActive('ErrorTest')"
+              (click)="navigateToErrorTest()"
+              style="cursor: pointer"
+            >
+              <i class="bi bi-bug text-danger"></i>
+              Error Interceptor Test
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [class.active]="isActive('ReduxStore')"
+              (click)="navigateToReduxStore()"
+              style="cursor: pointer"
+            >
+              <i class="bi bi-database text-info"></i>
+              Redux User Store
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [class.active]="isActive('SimpleUserNgrx')"
+              (click)="navigateToSimpleUserNgrx()"
+              style="cursor: pointer"
+            >
+              <i class="bi bi-person-plus text-success"></i>
+              Simple User NgRx
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [class.active]="isActive('NgrxFacadeAdaptor')"
+              (click)="navigateToNgrxFacadeAdaptor()"
+              style="cursor: pointer"
+            >
+              <i class="bi bi-person-plus text-success"></i>
+              Ngrx Facade Adaptor
+            </a>
+          </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" (click)="setActiveLink('Settings')">
-                            <i class="bi bi-sliders"></i>
-                            Settings
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" (click)="setActiveLink('Profile')">
-                            <i class="bi bi-person"></i>
-                            Profile
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [class.active]="isActive('JestValidation')"
+              (click)="navigateToJestValidation()"
+              style="cursor: pointer"
+            >
+              <i class="bi bi-check-circle text-primary"></i>
+              Jest Validation
+            </a>
+          </li>
 
-        <!-- Main Content -->
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-            <div
-                class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">{{ activeLink }}</h1>
-            </div>
+          <li class="nav-item">
+            <a class="nav-link" href="#" (click)="setActiveLink('Settings')">
+              <i class="bi bi-sliders"></i>
+              Settings
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" (click)="setActiveLink('Profile')">
+              <i class="bi bi-person"></i>
+              Profile
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
 
-            <!-- Router Outlet for Dynamic Content -->
-            <div class="content-area">
-                <router-outlet></router-outlet>
-            </div>
-        </main>
-    </div>
+    <!-- Main Content -->
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+      >
+        <h1 class="h2">{{ activeLink }}</h1>
+      </div>
+
+      <!-- Router Outlet for Dynamic Content -->
+      <div class="content-area">
+        <router-outlet></router-outlet>
+      </div>
+    </main>
+  </div>
 </div>
